@@ -10,6 +10,18 @@
     <link rel="stylesheet" href="assets/css/custom.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <style>
+        .btn-outline-light {
+            color: #ffffff; /* Texte blanc clair */
+            border-color: #3a784d; /* Bordure blanche claire */
+        }
+
+        .btn-outline-light:hover {
+            background-color: #2d5136; /* Fond vert au survol */
+            border-color: #28a745; /* Bordure verte au survol */
+            color: rgb(15, 14, 14); /* Texte blanc au survol */
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light shadow">
@@ -38,46 +50,13 @@
                         </li>
                     </ul>
                 </div>
-                <div class="navbar align-self-center d-flex">
-                    <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
-                            <div class="input-group-text">
-                                <i class="fa fa-fw fa-search"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
-                        <i class="fa fa-fw fa-search text-dark mr-2"></i>
-                    </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
-                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">0</span>
-                    </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
-                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+9</span>
-                    </a>
+                <div>
+                    <a href="log_in.html" class="btn btn-outline-light">Login</a>
+                    <a href="sign_up.html" class="btn btn-outline-light">Sign Up</a>
                 </div>
             </div>
-
         </div>
     </nav>
-    <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="w-100 pt-1 mb-5 text-right">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="" method="get" class="modal-content modal-body border-0 p-0">
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
-                    <button type="submit" class="input-group-text bg-success text-light">
-                        <i class="fa fa-fw fa-search text-white"></i>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
     <div id="template-mo-zay-hero-carousel" class="carousel slide" data-bs-ride="carousel">
         <ol class="carousel-indicators">
             <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="0" class="active"></li>
@@ -164,17 +143,17 @@
         </div>
         <div class="row">
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="./assets/img/hard_disk.jpg" class="rounded-circle img-fluid border"></a>
+                <a href="log_in.html"><img src="./assets/img/hard_disk.jpg" class="rounded-circle img-fluid border"></a>
                 <h5 class="text-center mt-3 mb-3">Disque Dur interne SSD  Western Digital<b>Purple 4 To</b></h5>
                 <p class="text-center"><a class="btn btn-success">Shoppez ici</a></p>
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="./assets/img/Catre_reseau.jpg" class="rounded-circle img-fluid border"></a>
+                <a href="log_in.html"><img src="./assets/img/Catre_reseau.jpg" class="rounded-circle img-fluid border"></a>
                 <h2 class="h5 text-center mt-3 mb-3">Carte Réseau 10GbE Intel Dual-Port <b>QXG-10G2T-X710</b></h2>
                 <p class="text-center"><a class="btn btn-success">Shoppez ici</a></p>
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="./assets/img/pc4.jpg" class="rounded-circle img-fluid border"></a>
+                <a href="log_in.html"><img src="./assets/img/pc4.jpg" class="rounded-circle img-fluid border"></a>
                 <h2 class="h5 text-center mt-3 mb-3">PC PORTABLE ZEPHYRUS <b>185H|32GB DDR5|2TB SSD</b></h2>
                 <p class="text-center"><a class="btn btn-success">Shoppez ici</a></p>
             </div>
@@ -194,7 +173,7 @@
             <div class="row">
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
-                        <a href="shop-single.html">
+                        <a href="log_in.html">
                             <img src="./assets/img/macbook.jpg" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
@@ -208,7 +187,7 @@
                                 </li>
                                 <li class="text-muted text-right">16.990,00 MAD</li>
                             </ul>
-                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">MacBook Air Silver Mockup</a>
+                            <a href="log_in.html" class="h2 text-decoration-none text-dark">MacBook Air Silver Mockup</a>
                             <p class="card-text">
                                 Le MacBook Air Silver Mockup dispose de 8 Go de RAM, d'un SSD de 256 Go, et d'un écran Retina de 
                                  13,3 pouces avec une résolution de 2560 x 1600 pixels.
@@ -220,7 +199,7 @@
                 </div>
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
-                        <a href="shop-single.html">
+                        <a href="log_in.html">
                             <img src="./assets/img/HARDDISK.jpg" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
@@ -234,7 +213,7 @@
                                 </li>
                                 <li class="text-muted text-right">499,99MAD</li>
                             </ul>
-                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">Disque Dur Externe Portable 500 GB USB 3.0 WD Western Digital</a>
+                            <a href="log_in.html" class="h2 text-decoration-none text-dark">Disque Dur Externe Portable 500 GB USB 3.0 WD Western Digital</a>
                             <p class="card-text">
                                 Préformaté en NTFS, il est prêt à l'emploi sur Windows et peut être reformaté pour d'autres systèmes. 
                                 Ce disque dur est fiable, sécurisé, et inclut des logiciels de sauvegarde pour protéger vos données. 
@@ -245,7 +224,7 @@
                 </div>
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
-                        <a href="shop-single.html">
+                        <a href="log_in.html">
                             <img src="./assets/img/MAC.jpg" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
@@ -259,7 +238,7 @@
                                 </li>
                                 <li class="text-muted text-right">5199,00MAD</li>
                             </ul>
-                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">DELL latitude 5330 2in1-i5 RAM 8GB-256G SSD (X360 Tactile)</a>
+                            <a href="log_in.html" class="h2 text-decoration-none text-dark">DELL latitude 5330 2in1-i5 RAM 8GB-256G SSD (X360 Tactile)</a>
                             <p class="card-text">
                                 Intel Core i5-1235U (12 éme Géneration ) (1.30 GHz UP 4.40 GHz 10C/12T, 8 Mo Cache ) 13,3 pouces 1920x1080 (FHD), 
                                 Ecran Tactile Pliable Carte Graphique	Intel Iris XE Graphics
