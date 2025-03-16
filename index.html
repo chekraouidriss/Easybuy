@@ -37,14 +37,27 @@
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home</a>
+                            <a class="nav-link" href="index.html">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
+                            <a class="nav-link" href="about.html">À Propos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="shop.html">Shop</a>
+                            <a class="nav-link" href="javascript:void(0);" onclick="checkLogin()">Boutique</a>
                         </li>
+                        <script>
+                            // Variable pour simuler l'état de connexion (true si connecté, false sinon)
+                            var isLoggedIn = false;
+                        
+                            function checkLogin() {
+                                if (!isLoggedIn) {
+                                    alert("Vous devez vous connecter avant d'accéder à la boutique !");
+                                    window.location.href = "log_in.html"
+                                } else {
+                                    window.location.href = "shop.html"; // Redirige vers la boutique si connecté
+                                }
+                            }
+                        </script>
                         <li class="nav-item">
                             <a class="nav-link" href="contact.html">Contact</a>
                         </li>
@@ -280,6 +293,7 @@
                         <li><a class="text-decoration-none" href="#">Disque dur interne</a></li>
                         <li><a class="text-decoration-none" href="#">Carte réseaux</a></li>
                         <li><a class="text-decoration-none" href="#">Double écran</a></li>
+                        <li><a class="text-decoration-none" href="#">Smartphone</a></li>
                     </ul>
                 </div>
 
