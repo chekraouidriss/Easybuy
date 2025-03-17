@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>EasyBuy</title>
+    <title>EasyBuy - Panier</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
@@ -27,7 +27,7 @@
     <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
 
-            <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
+            <a class="navbar-brand text-success logo h1 align-self-center" href="index.php">
                 <img src="assets/img/logo.png" width="128" height="90">
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,71 +37,122 @@
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">Accueil</a>
+                            <a class="nav-link" href="index.php">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">À Propos</a>
+                            <a class="nav-link" href="about.php">À Propos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="shop.html">Boutique</a>
+                            <a class="nav-link" href="shop.php">Boutique</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact</a>
+                            <a class="nav-link" href="contact.php">Contact</a>
                         </li>
                     </ul>
                 </div>
-                <div>
-                    <a href="log_in.html" class="btn btn-outline-light">Login</a>
-                    <a href="sign_up.html" class="btn btn-outline-light">Sign Up</a>
+                <div class="navbar align-self-center d-flex">
+                    <a class="nav-icon position-relative text-decoration-none" href="panier.php">
+                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">3</span>
+                    </a> 
+                </div>
+            </div>
+
+        </div>
+    </nav>
+    <!-- Close Header -->
+    <!-- Open Content -->
+    <section class="bg-light">
+        <div class="container pb-5">
+            <div class="row">
+                <div class="col-lg-12 mt-5">
+                    <h1 class="h2"><b>Votre Panier</b></h1>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Produit</th>
+                                    <th>Prix</th>
+                                    <th>Quantité</th>
+                                    <th>Total</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img src="assets/img/1.jpg" alt="Product Image" width="50" class="me-3">
+                                            <div>
+                                                <h6 class="mb-0">HP Laptop</h6>
+                                                <small class="text-muted">Catégorie: PC Portable</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>2500.00 MAD</td>
+                                    <td>
+                                        <input type="number" class="form-control" value="1" min="1" style="width: 70px;">
+                                    </td>
+                                    <td>2500.00 MAD</td>
+                                    <td>
+                                        <button class="btn btn-danger btn-sm">Supprimer</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img src="assets/img/2.jpg" alt="Product Image" width="50" class="me-3">
+                                            <div>
+                                                <h6 class="mb-0">Disque Dur Externe</h6>
+                                                <small class="text-muted">Catégorie: Stockage</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>500.00 MAD</td>
+                                    <td>
+                                        <input type="number" class="form-control" value="1" min="1" style="width: 70px;">
+                                    </td>
+                                    <td>500.00 MAD</td>
+                                    <td>
+                                        <button class="btn btn-danger btn-sm">Supprimer</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img src="assets/img/3.jpg" alt="Product Image" width="50" class="me-3">
+                                            <div>
+                                                <h6 class="mb-0">Carte Réseau</h6>
+                                                <small class="text-muted">Catégorie: Réseau</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>200.00 MAD</td>
+                                    <td>
+                                        <input type="number" class="form-control" value="1" min="1" style="width: 70px;">
+                                    </td>
+                                    <td>200.00 MAD</td>
+                                    <td>
+                                        <button class="btn btn-danger btn-sm">Supprimer</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3" class="text-end"><strong>Total</strong></td>
+                                    <td colspan="2"><strong>3200.00 MAD</strong></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="text-end">
+                        <button class="btn btn-success btn-lg" onclick="window.location.href='buy.php'">Passer à la caisse</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </nav>
-    <!-- Start Content Page -->
-    <div class="container-fluid bg-light py-5">
-        <div class="col-md-6 m-auto text-center">
-            <h1 class="h1">Contactez-nous</h1>
-            <p>
-                Nous sommes à votre écoute pour toute question, suggestion ou demande d'assistance. 
-            </p>
-        </div> 
-    </div>
-
-    <!-- Start Contact -->
-    <div class="container py-5">
-        <div class="row py-5">
-            <form class="col-md-9 m-auto" method="post" role="form">
-                <div class="row">
-                    <div class="form-group col-md-6 mb-3">
-                        <label for="inputname">Nom</label>
-                        <input type="text" class="form-control mt-1" id="nom" name="nom" placeholder="Nom">
-                    </div>
-                    <div class="form-group col-md-6 mb-3">
-                        <label for="inputemail">Email</label>
-                        <input type="email" class="form-control mt-1" id="email" name="email" placeholder="Email">
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="inputsubject">Objet</label>
-                    <input type="text" class="form-control mt-1" id="subject" name="subject" placeholder="Objet">
-                </div>
-                <div class="mb-3">
-                    <label for="inputmessage">Message</label>
-                    <textarea class="form-control mt-1" id="message" name="message" placeholder="Message" rows="8"></textarea>
-                </div>
-                <div class="row">
-                    <div class="col text-end mt-2">
-                        <a href="index.html">
-                            <button type="button" class="btn btn-success btn-lg px-3">Envoyer</button>
-                        </a>
-                    </div>                    
-                </div>
-            </form>
-        </div>
-    </div>
-    <!-- End Contact -->
-
-
+    </section>
+    <!-- Close Content -->
     <!-- Start Footer -->
     <footer class="bg-dark" id="tempaltemo_footer">
         <div class="container">
@@ -182,7 +233,6 @@
         <div class="w-100 bg-black py-3"></div>
     </footer>
     <!-- End Footer -->
-
     <!-- Start Script -->
     <script src="assets/js/jquery-1.11.0.min.js"></script>
     <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
@@ -191,5 +241,4 @@
     <script src="assets/js/custom.js"></script>
     <!-- End Script -->
 </body>
-
 </html>
