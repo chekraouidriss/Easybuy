@@ -65,7 +65,7 @@
                 </div>
                 <div>
                     <a href="log_in.php" class="btn btn-outline-light">Login</a>
-                    <a href="sign_up.php" class="btn btn-outline-light">Sign Up</a>
+                    <a href="log_in.php" class="btn btn-outline-light">Sign Up</a>
                 </div>
             </div>
         </div>
