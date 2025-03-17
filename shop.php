@@ -63,7 +63,7 @@
                             <a class="nav-link" href="about.php">À Propos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="shop.php">Shop</a>
+                            <a class="nav-link" href="shop.php">Boutique</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="contact.php">Contact</a>

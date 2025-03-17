@@ -21,6 +21,31 @@
             border-color: #28a745; /* Bordure verte au survol */
             color: rgb(15, 14, 14); /* Texte blanc au survol */
         }
+        .video-section {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .video-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+    }
+
+    .video-background video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Pour couvrir toute la section */
+    }
+
+    .video-overlay {
+        position: relative;
+        z-index: 1;
+        padding: 60px;
+        border-radius: 30px;}
     </style>
 </head>
 <body>
@@ -52,7 +77,7 @@
                 </div>
                 <div>
                     <a href="log_in.php" class="btn btn-outline-light">Login</a>
-                    <a href="sign_up.php" class="btn btn-outline-light">Sign Up</a>
+                    <a href="log_in.php" class="btn btn-outline-light">Sign Up</a>
                 </div>
             </div>
         </div>
@@ -75,19 +100,25 @@
             </form>
         </div>
     </div>
-    <section class="bg-success py-5" style="background: url('assets/img/workshup.webp') no-repeat center center; background-size: cover;">
-        <div class="container">
-            <div class="row align-items-center py-5">
-                <div class="col-md-8 text-white" style="background: rgba(129, 127, 127, 0.6); padding: 60px; border-radius: 30px;">
-                    <h1>À Propos de Nous</h1>
-                    <p>
-                        EasyBuy est une plateforme e-commerce spécialisée dans la vente de produits high-tech et informatiques. 
-                        Elle propose une large gamme d’équipements tels que des PC portables et de bureau, 
-                        des écrans, des disques durs, des cartes réseau et bien d’autres accessoires...
-                    </p>
-                </div>
+    <section class="bg-success py-5 video-section">
+        <div class="video-background">
+            <video autoplay muted loop playsinline>
+              <source src="assets/img/vid1.mp4" type="video/mp4">
+              Votre navigateur ne supporte pas la vidéo.
+            </video>
+        </div>
+    <div class="container">
+        <div class="row align-items-center py-5">
+            <div class="col-md-8 text-white video-overlay">
+                <h1>À Propos de Nous</h1>
+                <p>
+                    EasyBuy est une plateforme e-commerce spécialisée dans la vente de produits high-tech et informatiques. 
+                    Elle propose une large gamme d’équipements tels que des PC portables et de bureau, 
+                    des écrans, des disques durs, des cartes réseau et bien d’autres accessoires...
+                </p>
             </div>
         </div>
+    </div>
     </section>
     <section class="container py-5">
         <div class="row text-center pt-5 pb-3">
@@ -96,7 +127,6 @@
             </div>
         </div>
         <div class="row">
-
             <div class="col-md-6 col-lg-3 pb-5">
                 <div class="h-100 py-5 services-icon-wap shadow">
                     <div class="h1 text-success text-center"><i class="fa fa-truck fa-lg"></i></div>
