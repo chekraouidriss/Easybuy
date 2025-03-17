@@ -59,8 +59,8 @@
             <img src="./assets/img/logo.png" alt="EasyBuy Logo" width="93">
         </div>
         <div>
-            <a href="sign_up.html" class="btn btn-outline-success">Signup</a>
-            <a href="index.html" class="btn btn-outline-danger">Logout</a>
+            <a href="sign_up.php" class="btn btn-outline-success">Signup</a>
+            <a href="index.php" class="btn btn-outline-danger">Logout</a>
         </div>
     </div>
 
@@ -100,7 +100,7 @@
                     <!-- Lien vers la page d'inscription -->
                     <div class="row mt-3">
                         <div class="col text-center">
-                            <p>Pas encore de compte ? <a href="sign_up.html">S'inscrire</a></p>
+                            <p>Pas encore de compte ? <a href="sign_up.php">S'inscrire</a></p>
                         </div>
                     </div>
                 </form>

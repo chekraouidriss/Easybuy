@@ -59,8 +59,8 @@
             <img src="./assets/img/logo.png" alt="EasyBuy Logo" width="93">
         </div>
         <div>
-            <a href="log_in.html" class="btn btn-outline-success">Login</a>
-            <a href="index.html" class="btn btn-outline-danger">Logout</a>
+            <a href="log_in.php" class="btn btn-outline-success">Login</a>
+            <a href="index.php" class="btn btn-outline-danger">Logout</a>
         </div>
     </div>
 
