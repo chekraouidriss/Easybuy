@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>EasyBuy</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/templatemo.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>z
+        .btn-outline-light {
+            color: #ffffff;
+            border-color: #3a784d;
+        }
+
+        .btn-outline-light:hover {
+            background-color: #2d5136;
+            border-color: #28a745;
+            color: rgb(15, 14, 14);
+        }
+
+        .nav-link {
+            position: relative;
+            margin-right: 20px;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 100%;
+            width: 0;
+            height: 3px;
+            background-color:  #28a745;
+            ;
+            transition: width 0.5s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .contact-form {
+            position: relative;
+            min-height: auto; /* Ajustez la hauteur minimale */
+            z-index: 0;
+            padding: 20px; /* Réduisez le padding */
+            justify-content: center;
+            display: grid;
+            grid-template-rows: 1fr auto 1fr;
+            align-items: center;
+        }
+
+        .contact-form .container {
+            max-width: 600px; /* Réduisez la largeur maximale */
+        }
+
+        .contact-form h1 {
+            text-align: center;
+            font-size: 2rem; /* Réduisez la taille de la police */
+            font-weight: 400;
+            color: #fff;
+            font-family: "poppins";
+        }
+
+        .contact-form h2 {
+            line-height: 30px; /* Ajustez la hauteur de ligne */
+            margin-bottom: 10px; /* Réduisez la marge */
+            font-size: 24px; /* Réduisez la taille de la police */
+            font-weight: 500;
+            color: #58A399;
+            text-align: center;
+        }
+
+        .contact-form .main {
+            position: relative;
+            display: flex;
+            margin: 20px 0; /* Réduisez la marge */
+        }
+
+        .content {
+            flex-basis: 50%;
+            padding: 2em; /* Réduisez le padding */
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); /* Réduisez l'ombre */
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        .form-img {
+            flex-basis: 50%;
+            background: #f0f4f8;
+            background-size: cover;
+            padding: 20px; /* Réduisez le padding */
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+            align-items: center;
+            display: grid;
+        }
+
+        .form-img img {
+            max-width: 100%;
+        }
+
+        .btn, button, input {
+            border-radius: 25px; /* Ajustez le rayon de la bordure */
+        }
+
+        .btn:hover, button:hover {
+            color: #fff;
+            transition: 0.5s ease;
+        }
+
+        .contact-form form {
+            margin: 20px 0; /* Réduisez la marge */
+        }
+
+        .contact-form input, textarea {
+            outline: none;
+            margin-bottom: 10px; /* Réduisez la marge */
+            font-stretch: 16px;
+            color: #999;
+            padding: 10px 15px; /* Réduisez le padding */
+            width: 100%;
+            display: inline-block;
+            box-sizing: border-box;
+            border: none;
+            background: #fcfcfc;
+            transition: 0.3s ease;
+        }
+
+        .contact-form input:focus {
+            background: transparent;
+            border: 1px solid #58A399;
+        }
+
+        .contact-form button {
+            font-size: 16px; /* Réduisez la taille de la police */
+            color: #fff;
+            width: 100%;
+            background: #58A399;
+            font-weight: 600;
+            transition: 0.3s ease;
+            padding: 10px 15px; /* Réduisez le padding */
+            border: 1px solid #58A399;
+        }
+        .navbar {
+    padding-top: 0.5rem; /* Réduire le padding en haut */
+    padding-bottom: 0.5rem; /* Réduire le padding en bas */
+    min-height: 60px; /* Ajuster la hauteur minimale */
+}
+
+.navbar-brand {
+    padding: 0; /* Supprimer le padding autour du logo */
+    margin: 0; /* Supprimer la marge autour du logo */
+}
+
+
+.nav-link {
+    padding: 0.5rem 1rem; /* Réduire le padding des liens */
+    margin: 0; /* Supprimer la marge des liens */
+}
+.btn-outline-light {
+    color: #ffffff;
+    border-color: #3a784d;
+    background-color: transparent;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1.5rem; /* Ajustez le padding pour un meilleur rendu */
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 25px; /* Arrondir les coins */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ajouter une ombre légère */
+}
+
+.btn-outline-light:hover {
+    background-color: #2d5136;
+    border-color: #28a745;
+    color: #ffffff;
+    transform: translateY(-2px); /* Effet de soulèvement au survol */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Ombre plus prononcée au survol */
+}
+
+.btn-outline-light:active {
+    transform: translateY(0); /* Réinitialiser l'effet de soulèvement lors du clic */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre plus légère lors du clic */
+}
+
+.btn-outline-light {
+    padding: 0.25rem 0.75rem; /* Réduire le padding des boutons */
+    margin-left: 0.5rem; /* Réduire la marge entre les boutons */
+}
+        @media (max-width: 736px) {
+            .contact-form .main {
+                flex-direction: column;
+            }
+            .contact-form form {
+                margin-top: 20px; /* Réduisez la marge */
+                margin-bottom: 10px; /* Réduisez la marge */
+            }
+            .form-img {
+                border-radius: 0;
+                border-bottom-left-radius: 8px;
+                border-bottom-right-radius: 8px;
+                order: 2;
+            }
+            .content {
+                order: 1;
+                border-top-left-radius: 8px;
+                border-top-right-radius: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
+                <img src="assets/img/logo.png" width="128" height="90">
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="align-self-center collapse navbar-collapse flex-fill d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
+                <div class="flex-fill">
+                    <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php">Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.php">A propos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="shop.php">Boutique</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.php">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="log_in.php" class="btn btn-outline-light">
+                    <i class="fas fa-sign-in-alt"></i> Se connecter
+                </a>
+            </div>
+        </div>
+    </nav>

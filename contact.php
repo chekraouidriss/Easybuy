@@ -21,6 +21,91 @@
             border-color: #28a745; /* Bordure verte au survol */
             color: rgb(15, 14, 14); /* Texte blanc au survol */
         }
+        /* contact-form.css */
+.contact-form h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: left; /* Aligner le texte à gauche */
+    margin-left: 90px; /* Déplacer le titre vers la droite */
+}
+.contact-form {
+    padding: 50px 0;
+    background-color: #f9f9f9;
+}
+
+.contact-form .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.contact-form .main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form .content {
+    flex: 1;
+    margin-right: 30px;
+}
+
+.contact-form h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.contact-form textarea {
+    resize: vertical;
+    height: 150px;
+}
+
+.contact-form .btn {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form .btn:hover {
+    background-color: #218838;
+}
+
+.contact-form .form-img {
+    flex: 1;
+    text-align: center;
+}
+
+.contact-form .form-img img {
+    max-width: 100%;
+    border-radius: 10px;
+}
     </style>
 </head>
 <body>
@@ -52,56 +137,46 @@
                 </div>
                 <div>
                     <a href="log_in.php" class="btn btn-outline-light">Login</a>
-                    <a href="sign_up.php" class="btn btn-outline-light">Sign Up</a>
+                    <a href="log_in.php" class="btn btn-outline-light">Sign Up</a>
                 </div>
             </div>
         </div>
     </nav>
-    <!-- Start Content Page -->
-    <div class="container-fluid bg-light py-5">
-        <div class="col-md-6 m-auto text-center">
-            <h1 class="h1">Contactez-nous</h1>
-            <p>
-                Nous sommes à votre écoute pour toute question, suggestion ou demande d'assistance. 
-            </p>
-        </div> 
-    </div>
-
-    <!-- Start Contact -->
-    <div class="container py-5">
-        <div class="row py-5">
-            <form class="col-md-9 m-auto" method="post" role="form">
-                <div class="row">
-                    <div class="form-group col-md-6 mb-3">
-                        <label for="inputname">Nom</label>
-                        <input type="text" class="form-control mt-1" id="nom" name="nom" placeholder="Nom">
-                    </div>
-                    <div class="form-group col-md-6 mb-3">
-                        <label for="inputemail">Email</label>
-                        <input type="email" class="form-control mt-1" id="email" name="email" placeholder="Email">
-                    </div>
+    <div class="contact-form">
+        <div class="container">
+            <div class="main">
+                <div class="content">
+                    <h2>Contact Us</h2>
+                    <form method="post" id="contact-form">
+                        <input type="text" name="name" placeholder="Entrer votre Nom" />
+                        <input type="email" name="email" placeholder="Entrer votre Email" />
+                        <input type="text" name="objet" placeholder="Entrer votre Object" />
+                        <textarea name="message" placeholder="Votre Message"></textarea>
+                        <button type="submit" class="btn">Envoyer <i class="fas fa-paper-plane"></i></button>
+                    </form>
                 </div>
-                <div class="mb-3">
-                    <label for="inputsubject">Objet</label>
-                    <input type="text" class="form-control mt-1" id="subject" name="subject" placeholder="Objet">
+                <div class="form-img">
+                    <img src="assets/img/cnta.jpg" alt="" />
                 </div>
-                <div class="mb-3">
-                    <label for="inputmessage">Message</label>
-                    <textarea class="form-control mt-1" id="message" name="message" placeholder="Message" rows="8"></textarea>
-                </div>
-                <div class="row">
-                    <div class="col text-end mt-2">
-                        <a href="index.php">
-                            <button type="button" class="btn btn-success btn-lg px-3">Envoyer</button>
-                        </a>
-                    </div>                    
-                </div>
-            </form>
+            </div>
         </div>
     </div>
-    <!-- End Contact -->
 
 
+    
+<script>
+    document.getElementById("contact-form").addEventListener("submit", function(event) {
+      event.preventDefault(); // Empêche la soumission du formulaire
+  
+      // Récupère les valeurs des champs
+      var name = document.getElementsByName("name")[0].value;
+      var email = document.getElementsByName("email")[0].value;
+  
+      // Affiche l'alerte avec les informations
+      var message = "Bonjour " + name + ", merci de nous contacter. Votre message est bien reçu. Nous vous répondrons à l'adresse e-mail suivante : " + email;
+      alert(message);
+    });
+  </script>
     <!-- Start Footer -->
     <footer class="bg-dark" id="tempaltemo_footer">
         <div class="container">
