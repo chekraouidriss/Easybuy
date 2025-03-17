@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-    <title>EasyBuy - Panier</title>
+    <title>EasyBuy</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
@@ -10,11 +10,24 @@
     <link rel="stylesheet" href="assets/css/custom.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <style>
+        .btn-outline-light {
+            color: #ffffff; /* Texte blanc clair */
+            border-color: #3a784d; /* Bordure blanche claire */
+        }
+
+        .btn-outline-light:hover {
+            background-color: #2d5136; /* Fond vert au survol */
+            border-color: #28a745; /* Bordure verte au survol */
+            color: rgb(15, 14, 14); /* Texte blanc au survol */
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
-            <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
+
+            <a class="navbar-brand text-success logo h1 align-self-center" href="index.php">
                 <img src="assets/img/logo.png" width="128" height="90">
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,96 +37,71 @@
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">Accueil</a>
+                            <a class="nav-link" href="index.php">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">À Propos</a>
+                            <a class="nav-link" href="about.php">À Propos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="shop.html">Boutique</a>
+                            <a class="nav-link" href="shop.php">Boutique</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact</a>
+                            <a class="nav-link" href="contact.php">Contact</a>
                         </li>
                     </ul>
+                </div>
+                <div>
+                    <a href="log_in.php" class="btn btn-outline-light">Login</a>
+                    <a href="sign_up.php" class="btn btn-outline-light">Sign Up</a>
                 </div>
             </div>
         </div>
     </nav>
-    <!-- Close Header -->
-    <!-- Open Content -->
-    <div class="payment-card-gif"> <img src="assets/img/git.gif" alt="GIF animé"> </div>
-    <div class="payment-card">
-        <div class="payment-card-title text-center mb-4">
-            <b>Paiement</b>
-            <div class="payment-cardd-gif"> <img src="assets/img/giff.gif" alt="GIF animé"> </div>
-        </div>
-        <form>
-            <!-- Cartes enregistrées -->
-            <span class="payment-card-header">Cartes enregistrées :</span>
-            <div class="payment-row payment-row-vertical">
-                <div class="d-flex align-items-center gap-2">
-                    <img class="img-fluid" src="https://img.icons8.com/color/48/000000/mastercard-logo.png"/>
-                    <input type="text" placeholder="**** **** **** 3193" class="form-control-sm">
-                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#codeVerificationModal">Valider</button>
-                </div>
-            </div>
-            <div class="payment-row payment-row-vertical">
-                <div class="d-flex align-items-center gap-2">
-                    <img class="img-fluid" src="https://img.icons8.com/color/48/000000/visa.png"/>
-                    <input type="text" placeholder="**** **** **** 4296" class="form-control-sm">
-                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#codeVerificationModal">Valider</button>
-                </div>
-            </div>
-            <!-- Ajouter une nouvelle carte -->
-            <span class="payment-card-header">Ajouter une nouvelle carte :</span>
-            <div class="payment-row payment-row-vertical">
-                <div class="d-flex gap-2">
-                    <div class="flex-grow-1">
-                        <span class="payment-card-inner">Nom du titulaire de la carte</span>
-                        <input type="text" placeholder="Jean Dupont" class="form-control-sm">
-                    </div>
-                    <div class="flex-grow-1">
-                        <span class="payment-card-inner">Numéro de carte</span>
-                        <input type="text" placeholder="5134-5264-4" class="form-control-sm">
-                    </div>
-                </div>
-            </div>
-            <div class="payment-row payment-row-vertical">
-                <div class="d-flex gap-2">
-                    <div class="flex-grow-1">
-                        <span class="payment-card-inner">Date d'expiration</span>
-                        <input type="text" placeholder="MM/YY" class="form-control-sm">
-                    </div>
-                    <div class="flex-grow-1">
-                        <span class="payment-card-inner">CVV</span>
-                        <input type="text" placeholder="123" class="form-control-sm">
-                    </div>
-                </div>
-            </div>
-            <button class="btn btn-success btn-sm d-flex mx-auto mt-3"><b>Ajouter la carte</b></button>
-        </form>
+    <!-- Start Content Page -->
+    <div class="container-fluid bg-light py-5">
+        <div class="col-md-6 m-auto text-center">
+            <h1 class="h1">Contactez-nous</h1>
+            <p>
+                Nous sommes à votre écoute pour toute question, suggestion ou demande d'assistance. 
+            </p>
+        </div> 
     </div>
-    <!-- Fenêtre modale pour la vérification du code -->
-    <div class="modal fade" id="codeVerificationModal" tabindex="-1" aria-labelledby="codeVerificationModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="codeVerificationModalLabel">Vérification du code</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+    <!-- Start Contact -->
+    <div class="container py-5">
+        <div class="row py-5">
+            <form class="col-md-9 m-auto" method="post" role="form">
+                <div class="row">
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="inputname">Nom</label>
+                        <input type="text" class="form-control mt-1" id="nom" name="nom" placeholder="Nom">
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="inputemail">Email</label>
+                        <input type="email" class="form-control mt-1" id="email" name="email" placeholder="Email">
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <p>Veuillez entrer le code envoyé à votre adresse e-mail pour confirmer le paiement.</p>
-                    <input type="text" class="form-control form-control-sm" placeholder="Entrez le code">
+                <div class="mb-3">
+                    <label for="inputsubject">Objet</label>
+                    <input type="text" class="form-control mt-1" id="subject" name="subject" placeholder="Objet">
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Fermer</button>
-                    <button type="button" class="btn btn-success btn-sm">Confirmer</button>
+                <div class="mb-3">
+                    <label for="inputmessage">Message</label>
+                    <textarea class="form-control mt-1" id="message" name="message" placeholder="Message" rows="8"></textarea>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="col text-end mt-2">
+                        <a href="index.php">
+                            <button type="button" class="btn btn-success btn-lg px-3">Envoyer</button>
+                        </a>
+                    </div>                    
+                </div>
+            </form>
         </div>
     </div>
-    <!-- Close Content -->
+    <!-- End Contact -->
+
+
     <!-- Start Footer -->
     <footer class="bg-dark" id="tempaltemo_footer">
         <div class="container">
@@ -194,13 +182,14 @@
         <div class="w-100 bg-black py-3"></div>
     </footer>
     <!-- End Footer -->
+
     <!-- Start Script -->
     <script src="assets/js/jquery-1.11.0.min.js"></script>
     <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/templatemo.js"></script>
     <script src="assets/js/custom.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- End Script -->
 </body>
+
 </html>
