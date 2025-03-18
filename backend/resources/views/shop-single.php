@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-    <title>EasyBuy - Panier</title>
+    <title>EasyBuy</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
@@ -10,11 +10,24 @@
     <link rel="stylesheet" href="assets/css/custom.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <style>
+        .btn-outline-light {
+            color: #ffffff; /* Texte blanc clair */
+            border-color: #3a784d; /* Bordure blanche claire */
+        }
+
+        .btn-outline-light:hover {
+            background-color: #2d5136; /* Fond vert au survol */
+            border-color: #28a745; /* Bordure verte au survol */
+            color: rgb(15, 14, 14); /* Texte blanc au survol */
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
-            <a class="navbar-brand text-success logo h1 align-self-center" href="index.php">
+
+            <a class="navbar-brand text-success logo h1 align-self-center" href="index">
                 <img src="assets/img/logo.png" width="128" height="90">
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,95 +37,104 @@
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php">Accueil</a>
+                            <a class="nav-link" href="index">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.php">À Propos</a>
+                            <a class="nav-link" href="about">À Propos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="shop.php">Boutique</a>
+                            <a class="nav-link" href="shop">Boutique</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.php">Contact</a>
+                            <a class="nav-link" href="contact">Contact</a>
                         </li>
                     </ul>
                 </div>
+                <div class="navbar align-self-center d-flex">
+                    <a class="nav-icon position-relative text-decoration-none" href="Panier">
+                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
+                    </a> 
+                </div>
             </div>
+
         </div>
     </nav>
     <!-- Close Header -->
     <!-- Open Content -->
-    <div class="payment-card-gif"> <img src="assets/img/git.gif" alt="GIF animé"> </div>
-    <div class="payment-card">
-        <div class="payment-card-title text-center mb-4">
-            <b>Paiement</b>
-            <div class="payment-cardd-gif"> <img src="assets/img/giff.gif" alt="GIF animé"> </div>
+    <section class="bg-light">
+        <div class="container pb-5">
+            <div class="row">
+                <div class="col-lg-5 mt-5">
+                    <div class="card mb-3">
+                        <img class="card-img img-fluid" src="assets/img/1.jpg" alt="Card image cap" id="product-detail">
+                    </div>
+                    
+                </div>
+                <!-- col end -->
+                <div class="col-lg-7 mt-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1 class="h2">Nom:</h1>
+                            <p class="h3 py-2">2500.00MAD</p>
+                            <p class="py-2">
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                            </p>
+                            <ul class="list-inline">
+                                <li class="list-inline-item">
+                                    <h6>Catégorie:</h6>
+                                </li>
+                                <li class="list-inline-item">
+                                    <p class="text-muted"><strong>HP</strong></p>
+                                </li>
+                                </ul>
+                                <ul class="list-inline">
+                                <li class="list-inline-item">
+                                    <h6>Qte_Stock:</h6>
+                                </li>
+                                <li class="list-inline-item">
+                                    <p class="text-muted"><strong>3</strong></p>
+                                </li>
+                            </ul>
+
+                            <h6>Description:</h6>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse. Donec condimentum elementum convallis. Nunc sed orci a diam ultrices aliquet interdum quis nulla.</p>
+                            
+                            <form action="" method="GET">
+                                <input type="hidden" name="product-title" value="Activewear">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <ul class="list-inline pb-3">
+                                            <li class="list-inline-item text-right">
+                                                Quantity
+                                                <input type="hidden" name="product-quanity" id="product-quanity" value="1">
+                                            </li>
+                                            <li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>
+                                            <li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>
+                                            <li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="row pb-3">
+                                    <div class="col d-grid">
+                                        <a class="btn btn-success btn-lg" href="shop">Retour</a>
+                                    </div>
+                                    <div class="col d-grid">
+                                        <a href="panier" class="btn btn-success btn-lg">Ajouter au Panier</a>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <form>
-            <!-- Cartes enregistrées -->
-            <span class="payment-card-header">Cartes enregistrées :</span>
-            <div class="payment-row payment-row-vertical">
-                <div class="d-flex align-items-center gap-2">
-                    <img class="img-fluid" src="https://img.icons8.com/color/48/000000/mastercard-logo.png"/>
-                    <input type="text" placeholder="**** **** **** 3193" class="form-control-sm">
-                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#codeVerificationModal">Valider</button>
-                </div>
-            </div>
-            <div class="payment-row payment-row-vertical">
-                <div class="d-flex align-items-center gap-2">
-                    <img class="img-fluid" src="https://img.icons8.com/color/48/000000/visa.png"/>
-                    <input type="text" placeholder="**** **** **** 4296" class="form-control-sm">
-                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#codeVerificationModal">Valider</button>
-                </div>
-            </div>
-            <!-- Ajouter une nouvelle carte -->
-            <span class="payment-card-header">Ajouter une nouvelle carte :</span>
-            <div class="payment-row payment-row-vertical">
-                <div class="d-flex gap-2">
-                    <div class="flex-grow-1">
-                        <span class="payment-card-inner">Nom du titulaire de la carte</span>
-                        <input type="text" placeholder="Jean Dupont" class="form-control-sm">
-                    </div>
-                    <div class="flex-grow-1">
-                        <span class="payment-card-inner">Numéro de carte</span>
-                        <input type="text" placeholder="5134-5264-4" class="form-control-sm">
-                    </div>
-                </div>
-            </div>
-            <div class="payment-row payment-row-vertical">
-                <div class="d-flex gap-2">
-                    <div class="flex-grow-1">
-                        <span class="payment-card-inner">Date d'expiration</span>
-                        <input type="text" placeholder="MM/YY" class="form-control-sm">
-                    </div>
-                    <div class="flex-grow-1">
-                        <span class="payment-card-inner">CVV</span>
-                        <input type="text" placeholder="123" class="form-control-sm">
-                    </div>
-                </div>
-            </div>
-            <button class="btn btn-success btn-sm d-flex mx-auto mt-3"><b>Ajouter la carte</b></button>
-        </form>
-    </div>
-    <!-- Fenêtre modale pour la vérification du code -->
-    <div class="modal fade" id="codeVerificationModal" tabindex="-1" aria-labelledby="codeVerificationModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="codeVerificationModalLabel">Vérification du code</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Veuillez entrer le code envoyé à votre adresse e-mail pour confirmer le paiement.</p>
-                    <input type="text" class="form-control form-control-sm" placeholder="Entrez le code">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Fermer</button>
-                    <button type="button" class="btn btn-success btn-sm">Confirmer</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    </section>
     <!-- Close Content -->
     <!-- Start Footer -->
     <footer class="bg-dark" id="tempaltemo_footer">
@@ -200,7 +222,42 @@
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/templatemo.js"></script>
     <script src="assets/js/custom.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- End Script -->
+    <!-- Start Slider Script -->
+    <script src="assets/js/slick.min.js"></script>
+    <script>
+        $('#carousel-related-product').slick({
+            infinite: true,
+            arrows: false,
+            slidesToShow: 4,
+            slidesToScroll: 3,
+            dots: true,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 3
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 3
+                    }
+                }
+            ]
+        });
+    </script>
+    <!-- End Slider Script -->
+
 </body>
+
 </html>

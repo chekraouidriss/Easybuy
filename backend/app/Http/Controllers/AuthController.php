@@ -1,0 +1,106 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
+class AuthController extends Controller
+{
+    // Afficher le formulaire de connexion
+    public function showLoginForm()
+    {
+        return view('log_in');
+    }
+
+    // Traiter la connexion
+    public function login(Request $request)
+    {
+        // Valider les données du formulaire
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ], [
+            'email.required' => 'Le champ email est obligatoire.',
+            'password.required' => 'Le champ mot de passe est obligatoire.',
+        ]);
+    
+        // Tenter de connecter l'utilisateur
+        $credentials = $request->only('email', 'password');
+    
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->route('shop')->with('success', 'Connexion réussie !');
+        }
+    
+        // En cas d'échec, retourner avec une erreur
+        return back()->withErrors([
+            'email' => 'Les informations de connexion sont incorrectes.',
+        ]);
+    }
+
+    // Afficher le formulaire d'inscription
+    public function showSignupForm()
+    {
+        return view('log_in'); // Utiliser la même vue pour le signup
+    }
+
+    // Traiter l'inscription
+    public function signup(Request $request)
+{
+    // Valider les données du formulaire
+    $request->validate([
+        'nom' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|min:8|confirmed',
+        'adresse' => 'required|string|max:255',
+        'ville' => 'required|string|max:100',
+        'code' => 'required|string|max:20',
+        'telephone' => 'required|string|max:20',
+    ], [
+        'nom.required' => 'Le champ nom est obligatoire.',
+        'email.required' => 'Le champ email est obligatoire.',
+        'email.unique' => 'Cet email est déjà utilisé.',
+        'password.required' => 'Le champ mot de passe est obligatoire.',
+        'password.confirmed' => 'La confirmation du mot de passe ne correspond pas.',
+        'adresse.required' => 'Le champ adresse est obligatoire.',
+        'ville.required' => 'Le champ ville est obligatoire.',
+        'code.required' => 'Le champ code postal est obligatoire.',
+        'telephone.required' => 'Le champ téléphone est obligatoire.',
+    ]);
+
+    // Créer un nouvel utilisateur
+    $user = User::create([
+        'name' => $request->nom,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        'adresse' => $request->adresse,
+        'ville' => $request->ville,
+        'code_postale' => $request->code,
+        'telephone' => $request->telephone,
+    ]);
+
+    // Connecter l'utilisateur après l'inscription
+    Auth::login($user);
+
+    // Rediriger vers la page shop après inscription
+    return redirect()->route('shop')->with('success', 'Inscription réussie !');
+}
+
+    // Afficher la page shop
+    public function shop()
+    {
+        return view('shop');
+    }
+
+    // Déconnexion
+    public function logout(Request $request)
+    {
+        Auth::logout(); // Déconnecter l'utilisateur
+        $request->session()->invalidate(); // Invalider la session
+        $request->session()->regenerateToken(); // Régénérer le token CSRF
+        return redirect('/'); // Rediriger vers la page d'accueil
+    }
+}

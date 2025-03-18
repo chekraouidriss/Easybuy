@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <title>EasyBuy - Panier</title>
     <meta charset="utf-8">
@@ -10,24 +10,11 @@
     <link rel="stylesheet" href="assets/css/custom.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-    <style>
-        .btn-outline-light {
-            color: #ffffff; /* Texte blanc clair */
-            border-color: #3a784d; /* Bordure blanche claire */
-        }
-
-        .btn-outline-light:hover {
-            background-color: #2d5136; /* Fond vert au survol */
-            border-color: #28a745; /* Bordure verte au survol */
-            color: rgb(15, 14, 14); /* Texte blanc au survol */
-        }
-    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light shadow">
+    <nav class="navbar navbar-expand-lg navbar-light shadow"> 
         <div class="container d-flex justify-content-between align-items-center">
-
-            <a class="navbar-brand text-success logo h1 align-self-center" href="index.php">
+            <a class="navbar-brand text-success logo h1 align-self-center" href="index">
                 <img src="assets/img/logo.png" width="128" height="90">
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,121 +24,95 @@
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php">Accueil</a>
+                            <a class="nav-link" href="index">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.php">À Propos</a>
+                            <a class="nav-link" href="about">À Propos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="shop.php">Boutique</a>
+                            <a class="nav-link" href="shop">Boutique</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.php">Contact</a>
+                            <a class="nav-link" href="contact">Contact</a>
                         </li>
                     </ul>
                 </div>
-                <div class="navbar align-self-center d-flex">
-                    <a class="nav-icon position-relative text-decoration-none" href="panier.php">
-                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">3</span>
-                    </a> 
-                </div>
             </div>
-
         </div>
     </nav>
     <!-- Close Header -->
     <!-- Open Content -->
-    <section class="bg-light">
-        <div class="container pb-5">
-            <div class="row">
-                <div class="col-lg-12 mt-5">
-                    <h1 class="h2"><b>Votre Panier</b></h1>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Produit</th>
-                                    <th>Prix</th>
-                                    <th>Quantité</th>
-                                    <th>Total</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/img/1.jpg" alt="Product Image" width="50" class="me-3">
-                                            <div>
-                                                <h6 class="mb-0">HP Laptop</h6>
-                                                <small class="text-muted">Catégorie: PC Portable</small>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>2500.00 MAD</td>
-                                    <td>
-                                        <input type="number" class="form-control" value="1" min="1" style="width: 70px;">
-                                    </td>
-                                    <td>2500.00 MAD</td>
-                                    <td>
-                                        <button class="btn btn-danger btn-sm">Supprimer</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/img/2.jpg" alt="Product Image" width="50" class="me-3">
-                                            <div>
-                                                <h6 class="mb-0">Disque Dur Externe</h6>
-                                                <small class="text-muted">Catégorie: Stockage</small>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>500.00 MAD</td>
-                                    <td>
-                                        <input type="number" class="form-control" value="1" min="1" style="width: 70px;">
-                                    </td>
-                                    <td>500.00 MAD</td>
-                                    <td>
-                                        <button class="btn btn-danger btn-sm">Supprimer</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/img/3.jpg" alt="Product Image" width="50" class="me-3">
-                                            <div>
-                                                <h6 class="mb-0">Carte Réseau</h6>
-                                                <small class="text-muted">Catégorie: Réseau</small>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>200.00 MAD</td>
-                                    <td>
-                                        <input type="number" class="form-control" value="1" min="1" style="width: 70px;">
-                                    </td>
-                                    <td>200.00 MAD</td>
-                                    <td>
-                                        <button class="btn btn-danger btn-sm">Supprimer</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="3" class="text-end"><strong>Total</strong></td>
-                                    <td colspan="2"><strong>3200.00 MAD</strong></td>
-                                </tr>
-                            </tfoot>
-                        </table>
+    <div class="payment-card-gif"> <img src="assets/img/git.gif" alt="GIF animé"> </div>
+    <div class="payment-card">
+        <div class="payment-card-title text-center mb-4">
+            <b>Paiement</b>
+            <div class="payment-cardd-gif"> <img src="assets/img/giff.gif" alt="GIF animé"> </div>
+        </div>
+        <form>
+            <!-- Cartes enregistrées -->
+            <span class="payment-card-header">Cartes enregistrées :</span>
+            <div class="payment-row payment-row-vertical">
+                <div class="d-flex align-items-center gap-2">
+                    <img class="img-fluid" src="https://img.icons8.com/color/48/000000/mastercard-logo.png"/>
+                    <input type="text" placeholder="**** **** **** 3193" class="form-control-sm">
+                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#codeVerificationModal">Valider</button>
+                </div>
+            </div>
+            <div class="payment-row payment-row-vertical">
+                <div class="d-flex align-items-center gap-2">
+                    <img class="img-fluid" src="https://img.icons8.com/color/48/000000/visa.png"/>
+                    <input type="text" placeholder="**** **** **** 4296" class="form-control-sm">
+                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#codeVerificationModal">Valider</button>
+                </div>
+            </div>
+            <!-- Ajouter une nouvelle carte -->
+            <span class="payment-card-header">Ajouter une nouvelle carte :</span>
+            <div class="payment-row payment-row-vertical">
+                <div class="d-flex gap-2">
+                    <div class="flex-grow-1">
+                        <span class="payment-card-inner">Nom du titulaire de la carte</span>
+                        <input type="text" placeholder="Jean Dupont" class="form-control-sm">
                     </div>
-                    <div class="text-end">
-                        <button class="btn btn-success btn-lg" onclick="window.location.href='buy.php'">Passer à la caisse</button>
+                    <div class="flex-grow-1">
+                        <span class="payment-card-inner">Numéro de carte</span>
+                        <input type="text" placeholder="5134-5264-4" class="form-control-sm">
                     </div>
                 </div>
             </div>
+            <div class="payment-row payment-row-vertical">
+                <div class="d-flex gap-2">
+                    <div class="flex-grow-1">
+                        <span class="payment-card-inner">Date d'expiration</span>
+                        <input type="text" placeholder="MM/YY" class="form-control-sm">
+                    </div>
+                    <div class="flex-grow-1">
+                        <span class="payment-card-inner">CVV</span>
+                        <input type="text" placeholder="123" class="form-control-sm">
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-success btn-sm d-flex mx-auto mt-3"><b>Ajouter la carte</b></button>
+        </form>
+    </div>
+    <!-- Fenêtre modale pour la vérification du code -->
+    <div class="modal fade" id="codeVerificationModal" tabindex="-1" aria-labelledby="codeVerificationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="codeVerificationModalLabel">Vérification du code</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Veuillez entrer le code envoyé à votre adresse e-mail pour confirmer le paiement.</p>
+                    <input type="text" class="form-control form-control-sm" placeholder="Entrez le code">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-success btn-sm">Confirmer</button>
+                </div>
+            </div>
         </div>
-    </section>
+    </div>
     <!-- Close Content -->
     <!-- Start Footer -->
     <footer class="bg-dark" id="tempaltemo_footer">
@@ -239,6 +200,7 @@
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/templatemo.js"></script>
     <script src="assets/js/custom.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- End Script -->
 </body>
 </html>

@@ -305,15 +305,14 @@
             color: #fff;
         }
         .form-container.sign-up {
-    left: 0;
-    width: 50%;
-    opacity: 0;
-    z-index: 1;
-    overflow-y: auto; /* Ajout du scroll */
-    max-height: 230%; /* Assurez-vous que cela prend toute la hauteur disponible */
-    padding-bottom: 30px; /* Un peu d'espace en bas pour éviter que le dernier champ ne soit coupé */
-}
-
+            left: 0;
+            width: 50%;
+            opacity: 0;
+            z-index: 1;
+            overflow-y: auto; /* Ajout du scroll */
+            max-height: 230%; /* Assurez-vous que cela prend toute la hauteur disponible */
+            padding-bottom: 30px; /* Un peu d'espace en bas pour éviter que le dernier champ ne soit coupé */
+        }
     </style>
 </head>
 <body>
@@ -322,14 +321,15 @@
         <img src="./assets/img/logo.png" alt="EasyBuy Logo" width="93">
     </div>
     <div>
-        <a href="index.php" class="btn btn-outline-danger">
+        <a href="index" class="btn btn-outline-danger">
             Logout
         </a>
     </div>
 </div>
 <div class="container" id="container">
     <div class="form-container sign-up">
-        <form method="post">
+        <form method="POST" action="{{ route('signup.submit') }}">
+            @csrf <!-- Jeton CSRF pour la sécurité -->
             <h1>Créer Un Compte</h1>
             <div class="social-icons">
                 <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
@@ -337,18 +337,35 @@
                 <a href="#" class="icon"><i class="fa-brands fa-instagram"></i></a>
             </div>
             <span>ou utilisez votre email pour vous inscrire</span>
-            <input type="text" placeholder="Nom Complet" name="nom" class="sign-up-input" required />
-            <input type="text" placeholder="Adresse" name="adresse" class="sign-up-input" required />
-            <input type="text" placeholder="Code postal" name="code" class="sign-up-input" required />
-            <input type="text" placeholder="Ville" name="ville" class="sign-up-input" required />
-            <input type="tel" placeholder="Téléphone" name="telephone" class="sign-up-input" required />
-            <input type="email" placeholder="Email" name="email" class="sign-up-input" required />
-            <input type="password" placeholder="Mot de Passe" name="password" class="sign-up-input" required />
-            <button name="inscrire">S'inscrire</button>
+            <input type="text" placeholder="Nom Complet" name="nom" class="sign-up-input" autocomplete="name" required />
+            <input type="text" placeholder="Adresse" name="adresse" class="sign-up-input" autocomplete="address-line1" required />
+            <input type="text" placeholder="Code postal" name="code" class="sign-up-input" autocomplete="postal-code" required />
+            <input type="text" placeholder="Ville" name="ville" class="sign-up-input" autocomplete="address-level2" required />
+            <input type="tel" placeholder="Téléphone" name="telephone" class="sign-up-input" autocomplete="tel" required />
+            <input type="email" placeholder="Email" name="email" class="sign-up-input" autocomplete="email" required />
+            <input type="password" placeholder="Mot de Passe" name="password" class="sign-up-input" autocomplete="new-password" required />
+            <input type="password" placeholder="Confirmer le mot de passe" name="password_confirmation" class="sign-up-input" autocomplete="new-password" required />
+            <button type="submit" name="inscrire">S'inscrire</button>
         </form>
     </div>
     <div class="form-container sign-in">
-        <form method="post" action="espace_admin.php">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+        <form method="POST" action="{{ route('login.submit') }}">
+            @csrf <!-- Jeton CSRF pour la sécurité -->
             <h1>Se connecter</h1>
             <div class="social-icons">
                 <a href="https://www.google.com" class="icon" target="_blank">
@@ -362,8 +379,8 @@
                 </a>
             </div>
             <span>Ou utilisez votre adresse e-mail et votre mot de passe actuel</span>
-            <input type="email" placeholder="Email" required name="email" />
-            <input type="password" placeholder="Mot de passe" required name="Mot de passe" />
+            <input type="email" placeholder="Email" required name="email" autocomplete="email" />
+            <input type="password" placeholder="Mot de passe" required name="password" autocomplete="current-password" />
             <a href="" style="color:black"> Connectez-vous ici.?</a>
             <button type="submit" name="connexion">Se connecter</button>
         </form>
