@@ -52,7 +52,7 @@
     <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
 
-            <a class="navbar-brand text-success logo h1 align-self-center" href="index.php">
+            <a class="navbar-brand text-success logo h1 align-self-center" href="index">
                 <img src="assets/img/logo.png" width="128" height="90">
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,22 +62,22 @@
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php">Accueil</a>
+                            <a class="nav-link" href="index">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.php">À Propos</a>
+                            <a class="nav-link" href="about">À Propos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="shop.php">Boutique</a>
+                            <a class="nav-link" href="shop">Boutique</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.php">Contact</a>
+                            <a class="nav-link" href="contact">Contact</a>
                         </li>
                     </ul>
                 </div>
                 <div>
-                    <a href="log_in.php" class="btn btn-outline-light">Login</a>
-                    <a href="log_in.php" class="btn btn-outline-light">Sign Up</a>
+                    <a href="log_in" class="btn btn-outline-light">Login</a>
+                    <a href="log_in" class="btn btn-outline-light">Sign Up</a>
                 </div>
             </div>
         </div>

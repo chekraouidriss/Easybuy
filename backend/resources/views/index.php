@@ -27,7 +27,7 @@
     <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
 
-            <a class="navbar-brand text-success logo h1 align-self-center" href="index.php">
+            <a class="navbar-brand text-success logo h1 align-self-center" href="index">
                 <img src="assets/img/logo.png" width="128" height="90">
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,10 +37,10 @@
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php">Accueil</a>
+                            <a class="nav-link" href="index">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.php">À Propos</a>
+                            <a class="nav-link" href="about">À Propos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="javascript:void(0);" onclick="checkLogin()">Boutique</a>
@@ -52,20 +52,20 @@
                             function checkLogin() {
                                 if (!isLoggedIn) {
                                     alert("Vous devez vous connecter avant d'accéder à la boutique !");
-                                    window.location.href = "log_in.php"
+                                    window.location.href = "log_in"
                                 } else {
-                                    window.location.href = "shop.php"; // Redirige vers la boutique si connecté
+                                    window.location.href = "shop"; // Redirige vers la boutique si connecté
                                 }
                             }
                         </script>
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.php">Contact</a>
+                            <a class="nav-link" href="contact">Contact</a>
                         </li>
                     </ul>
                 </div>
                 <div>
-                    <a href="log_in.php" class="btn btn-outline-light">Login</a>
-                    <a href="log_in.php" class="btn btn-outline-light">Sign Up</a>
+                    <a href="log_in" class="btn btn-outline-light">Login</a>
+                    <a href="log_in" class="btn btn-outline-light">Sign Up</a>
                 </div>
             </div>
         </div>
@@ -156,17 +156,17 @@
         </div>
         <div class="row">
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="log_in.php"><img src="./assets/img/hard_disk.jpg" class="rounded-circle img-fluid border"></a>
+                <a href="log_in"><img src="./assets/img/hard_disk.jpg" class="rounded-circle img-fluid border"></a>
                 <h5 class="text-center mt-3 mb-3">Disque Dur interne SSD  Western Digital<b>Purple 4 To</b></h5>
                 <p class="text-center"><a class="btn btn-success">Shoppez ici</a></p>
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="log_in.php"><img src="./assets/img/Catre_reseau.jpg" class="rounded-circle img-fluid border"></a>
+                <a href="log_in"><img src="./assets/img/Catre_reseau.jpg" class="rounded-circle img-fluid border"></a>
                 <h2 class="h5 text-center mt-3 mb-3">Carte Réseau 10GbE Intel Dual-Port <b>QXG-10G2T-X710</b></h2>
                 <p class="text-center"><a class="btn btn-success">Shoppez ici</a></p>
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="log_in.php"><img src="./assets/img/pc4.jpg" class="rounded-circle img-fluid border"></a>
+                <a href="log_in"><img src="./assets/img/pc4.jpg" class="rounded-circle img-fluid border"></a>
                 <h2 class="h5 text-center mt-3 mb-3">PC PORTABLE ZEPHYRUS <b>185H|32GB DDR5|2TB SSD</b></h2>
                 <p class="text-center"><a class="btn btn-success">Shoppez ici</a></p>
             </div>
@@ -186,7 +186,7 @@
             <div class="row">
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
-                        <a href="log_in.php">
+                        <a href="log_in">
                             <img src="./assets/img/macbook.jpg" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
@@ -200,7 +200,7 @@
                                 </li>
                                 <li class="text-muted text-right">16.990,00 MAD</li>
                             </ul>
-                            <a href="log_in.php" class="h2 text-decoration-none text-dark">MacBook Air Silver Mockup</a>
+                            <a href="log_in" class="h2 text-decoration-none text-dark">MacBook Air Silver Mockup</a>
                             <p class="card-text">
                                 Le MacBook Air Silver Mockup dispose de 8 Go de RAM, d'un SSD de 256 Go, et d'un écran Retina de 
                                  13,3 pouces avec une résolution de 2560 x 1600 pixels.
@@ -212,7 +212,7 @@
                 </div>
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
-                        <a href="log_in.php">
+                        <a href="log_in">
                             <img src="./assets/img/HARDDISK.jpg" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
@@ -226,7 +226,7 @@
                                 </li>
                                 <li class="text-muted text-right">499,99MAD</li>
                             </ul>
-                            <a href="log_in.php" class="h2 text-decoration-none text-dark">Disque Dur Externe Portable 500 GB USB 3.0 WD Western Digital</a>
+                            <a href="log_in" class="h2 text-decoration-none text-dark">Disque Dur Externe Portable 500 GB USB 3.0 WD Western Digital</a>
                             <p class="card-text">
                                 Préformaté en NTFS, il est prêt à l'emploi sur Windows et peut être reformaté pour d'autres systèmes. 
                                 Ce disque dur est fiable, sécurisé, et inclut des logiciels de sauvegarde pour protéger vos données. 
@@ -237,7 +237,7 @@
                 </div>
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
-                        <a href="log_in.php">
+                        <a href="log_in">
                             <img src="./assets/img/MAC.jpg" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
@@ -251,7 +251,7 @@
                                 </li>
                                 <li class="text-muted text-right">5199,00MAD</li>
                             </ul>
-                            <a href="log_in.php" class="h2 text-decoration-none text-dark">DELL latitude 5330 2in1-i5 RAM 8GB-256G SSD (X360 Tactile)</a>
+                            <a href="log_in" class="h2 text-decoration-none text-dark">DELL latitude 5330 2in1-i5 RAM 8GB-256G SSD (X360 Tactile)</a>
                             <p class="card-text">
                                 Intel Core i5-1235U (12 éme Géneration ) (1.30 GHz UP 4.40 GHz 10C/12T, 8 Mo Cache ) 13,3 pouces 1920x1080 (FHD), 
                                 Ecran Tactile Pliable Carte Graphique	Intel Iris XE Graphics
