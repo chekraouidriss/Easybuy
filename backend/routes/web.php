@@ -7,7 +7,7 @@ use App\Http\Controllers\AuthController;
 Route::get('/log_in', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/signup', [AuthController::class, 'signup'])->name('signup.submit');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
-Route::get('/shop', [AuthController::class, 'shop'])->middleware('auth')->name('shop');
+Route::get('/shop/search', [AuthController::class, 'search'])->name('shop.search');
 
 // Route protégée pour la page shop
 Route::get('/shop', [AuthController::class, 'shop'])->middleware('auth')->name('shop');
