@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Produit;
 
 class AuthController extends Controller
 {
@@ -92,7 +93,11 @@ class AuthController extends Controller
     // Afficher la page shop
     public function shop()
     {
-        return view('shop');
+        // Récupérer tous les produits depuis la base de données
+        $produits = Produit::all(); // Assurez-vous d'importer le modèle Produit en haut du fichier
+    
+        // Passer les produits à la vue shop
+        return view('shop', compact('produits'));
     }
 
     // Déconnexion
@@ -103,4 +108,18 @@ class AuthController extends Controller
         $request->session()->regenerateToken(); // Régénérer le token CSRF
         return redirect('/'); // Rediriger vers la page d'accueil
     }
+    public function search(Request $request)
+{
+    // Récupérer le terme de recherche depuis la requête
+    $query = $request->input('query');
+
+    // Effectuer la recherche dans la base de données
+    $produits = Produit::where('Nom', 'LIKE', "%{$query}%")
+                        ->orWhere('Description', 'LIKE', "%{$query}%")
+                        ->get();
+
+    // Passer les résultats à la vue shop
+    return view('shop', compact('produits'));
+}
+    
 }
