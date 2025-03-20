@@ -13,7 +13,7 @@
     <style>
         .btn-outline-light {
             color: #ffffff; /* Texte blanc clair */
-            border-color:rgb(27, 44, 32); /* Bordure blanche claire */
+            border-color: #3a784d; /* Bordure blanche claire */
         }
 
         .btn-outline-light:hover {
