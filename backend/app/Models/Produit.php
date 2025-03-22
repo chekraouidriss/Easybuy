@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Produit extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     // Nom de la table dans la base de données
     protected $table = 'Produits';
