@@ -121,5 +121,17 @@ class AuthController extends Controller
     // Passer les résultats à la vue shop
     return view('shop', compact('produits'));
 }
-    
+public function adminDashboard()
+{
+    // Calculer les statistiques des produits
+    $totalProduits = Produit::count();
+    $produitsEnStock = Produit::where('QntStock', '>', 0)->count();
+    $ruptureDeStock = Produit::where('QntStock', '=', 0)->count();
+    $produits = Produit::all(); // Récupérer tous les produits
+
+    // Passer les données à la vue admin
+    return view('admin', compact('totalProduits', 'produitsEnStock', 'ruptureDeStock', 'produits'));
+}
+
+
 }
