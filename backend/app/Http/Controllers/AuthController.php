@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Produit;
+use App\Models\Admin;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -27,16 +29,33 @@ class AuthController extends Controller
             'email.required' => 'Le champ email est obligatoire.',
             'password.required' => 'Le champ mot de passe est obligatoire.',
         ]);
-    
-        // Tenter de connecter l'utilisateur
-        $credentials = $request->only('email', 'password');
-    
-        if (Auth::attempt($credentials)) {
+
+        // Récupérer l'email et le mot de passe
+        $email = $request->input('email');
+        $password = $request->input('password');
+
+        Log::info('Tentative de connexion avec email : ' . $email); // Log l'email
+
+        // 1. Vérifier si l'utilisateur est un administrateur
+        if (Admin::isAdmin($email, $password)) {
+            Log::info('Administrateur trouvé : ' . $email); // Log si l'admin est trouvé
+
+            // Connecter l'utilisateur en tant qu'administrateur
+            Auth::guard('admin')->loginUsingId(Admin::where('Email', $email)->first()->id);
+
+            return redirect()->route('admin.dashboard')->with('success', 'Connexion réussie en tant qu\'administrateur !');
+        }
+
+        // 2. Vérifier si l'utilisateur est un utilisateur normal
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
             $request->session()->regenerate();
+
+            Log::info('Utilisateur trouvé : ' . $email); // Log si l'utilisateur est trouvé
             return redirect()->route('shop')->with('success', 'Connexion réussie !');
         }
-    
+
         // En cas d'échec, retourner avec une erreur
+        Log::error('Échec de la connexion pour email : ' . $email); // Log en cas d'échec
         return back()->withErrors([
             'email' => 'Les informations de connexion sont incorrectes.',
         ]);
