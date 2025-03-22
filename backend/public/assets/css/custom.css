@@ -1,0 +1,111 @@
+/* Styles pour les titres */
+.payment-card-header {
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+    color: #302d2d;
+}
+
+/* Styles pour les sous-titres */
+.payment-card-inner {
+    font-size: 14px;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 4px;
+    color: #585555;
+}
+
+/* Styles pour les champs de formulaire */
+.form-control-sm {
+    font-size: 12px;
+    padding: 6px 8px;
+    margin-bottom: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+}
+
+/* Styles pour les boutons */
+.btn-sm {
+    font-size: 12px;
+    padding: 6px 12px;
+}
+
+/* Espacement entre les lignes */
+.payment-row {
+    margin-bottom: 12px;
+}
+
+/* Alignement vertical des champs */
+.payment-row-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Espacement entre les éléments */
+}
+
+/* Style pour la carte de paiement */
+/* Style pour la carte de paiement */
+/* Style pour la carte de paiement avec image de fond */
+.payment-card {
+    max-width: 680px; /* Largeur maximale de la div */
+    width: 100%; /* La div prendra 100% de la largeur disponible jusqu'à max-width */
+    margin: 20px auto; /* Centrer la div horizontalement avec une marge */
+    padding: 20px; /* Espace intérieur */
+    border: 1px solid #ddd; /* Bordure */
+    border-radius: 8px; /* Coins arrondis */
+    background-color: #ebeaea; /* Couleur de fond */
+    box-sizing: border-box; /* Inclure le padding et la bordure dans la largeur*/
+    
+}
+/* Style pour les images de cartes */
+.payment-card img {
+    width: 35px;
+    height: auto;
+}
+.payment-card-gif{
+    position: relative;
+    height: 0px;
+    width: 250px;
+    left: 2%;
+    top: 120px;
+}
+.payment-card-gif img {
+    width: 100%; /* Le GIF prend toute la largeur du conteneur */
+    height: auto; /* Conserver les proportions */
+}
+.payment-cardd-gif{
+    position: relative;
+    height: 0px;
+    width: 150px;
+    left: 83%;
+    top: -70px;
+}
+.payment-cardd-gif img {
+    width: 100%; /* Le GIF prend toute la largeur du conteneur */
+    height: auto; /* Conserver les proportions */
+}
+/* Ajustement des marges */
+.mt-3 {
+    margin-top: 16px !important;
+}
+/* Ajustement pour les petits écrans */
+@media (max-width: 576px) {
+    .payment-card {
+        padding: 15px;
+    }
+    .payment-card-header {
+        font-size: 13px;
+    }
+    .payment-card-inner {
+        font-size: 11px;
+    }
+    .form-control-sm {
+        font-size: 11px;
+        padding: 5px 7px;
+    }
+    .btn-sm {
+        font-size: 11px;
+        padding: 5px 10px;
+    }
+}
