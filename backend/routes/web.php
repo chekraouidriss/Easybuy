@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProduitController;
+
+
 
 // Routes pour l'authentification
 Route::get('/log_in', [AuthController::class, 'showLoginForm'])->name('login');
@@ -11,18 +14,6 @@ Route::get('/shop/search', [AuthController::class, 'search'])->name('shop.search
 
 // Route protégée pour la page shop
 Route::get('/shop', [AuthController::class, 'shop'])->middleware('auth')->name('shop');
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -49,3 +40,9 @@ Route::get('/shop-single', function () {
 Route::get('/sign_up', function () {
     return view('sign_up');
 });
+Route::get('/admin', [AuthController::class, 'adminDashboard'])->name('admin.dashboard');
+Route::resource('produits', ProduitController::class);
+Route::post('/produits', [ProduitController::class, 'store'])->name('produits.store');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/produits/{produit}/edit', [ProduitController::class, 'edit'])->name('produits.edit');
+Route::put('/produits/{produit}', [ProduitController::class, 'update'])->name('produits.update');
