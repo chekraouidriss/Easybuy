@@ -4,12 +4,12 @@
     <title>EasyBuy</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/templatemo.css">
-    <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/templatemo.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
-    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.min.css') }}">
     <style>
         .btn-outline-light {
             color: #ffffff; /* Texte blanc clair */
@@ -28,7 +28,7 @@
         <div class="container d-flex justify-content-between align-items-center">
 
             <a class="navbar-brand text-success logo h1 align-self-center" href="index">
-                <img src="assets/img/logo.png" width="128" height="90">
+                <img src="{{ asset('assets/img/logo.png') }}" width="128" height="90">
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -67,7 +67,7 @@
             <div class="row">
                 <div class="col-lg-5 mt-5">
                     <div class="card mb-3">
-                        <img class="card-img img-fluid" src="assets/img/1.jpg" alt="Card image cap" id="product-detail">
+                    <img class="card-img img-fluid" src="{{ asset($produit->SrcImage) }}" alt="{{ $produit->Nom }}">
                     </div>
                     
                 </div>
@@ -75,8 +75,8 @@
                 <div class="col-lg-7 mt-5">
                     <div class="card">
                         <div class="card-body">
-                            <h1 class="h2">Nom:</h1>
-                            <p class="h3 py-2">2500.00MAD</p>
+                            <h1 class="h2">Nom:<b>{{ $produit->Nom }}</b></h1>
+                            <p class="h3 py-2"><b>{{ $produit->Prix }} MAD</b></p>
                             <p class="py-2">
                                 <i class="fa fa-star text-warning"></i>
                                 <i class="fa fa-star text-warning"></i>
@@ -89,7 +89,7 @@
                                     <h6>Catégorie:</h6>
                                 </li>
                                 <li class="list-inline-item">
-                                    <p class="text-muted"><strong>HP</strong></p>
+                                    <p class="text-muted"><strong><b>{{ $produit->Categorie }}</b></strong></p>
                                 </li>
                                 </ul>
                                 <ul class="list-inline">
@@ -97,18 +97,17 @@
                                     <h6>Qte_Stock:</h6>
                                 </li>
                                 <li class="list-inline-item">
-                                    <p class="text-muted"><strong>3</strong></p>
+                                    <p class="text-muted"><strong><b>{{ $produit->QntStock }}</b></strong></p>
                                 </li>
                             </ul>
 
                             <h6>Description:</h6>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse. Donec condimentum elementum convallis. Nunc sed orci a diam ultrices aliquet interdum quis nulla.</p>
-                            
+                            <p><b>{{ $produit->Description }}</b></p>
                             <form action="" method="GET">
                                 <input type="hidden" name="product-title" value="Activewear">
                                 <div class="row">
                                     <div class="col-auto">
-                                        <ul class="list-inline pb-3">
+                                    <ul class="list-inline pb-3">
                                             <li class="list-inline-item text-right">
                                                 Quantity
                                                 <input type="hidden" name="product-quanity" id="product-quanity" value="1">
@@ -120,9 +119,9 @@
                                     </div>
                                 </div>
                                 <div class="row pb-3">
-                                    <div class="col d-grid">
-                                        <a class="btn btn-success btn-lg" href="shop">Retour</a>
-                                    </div>
+                                <div class="col d-grid">
+                                    <a class="btn btn-success btn-lg" href="{{ route('shop') }}">Retour</a>
+                                </div>
                                     <div class="col d-grid">
                                         <a href="panier" class="btn btn-success btn-lg">Ajouter au Panier</a>
                                     </div>
@@ -255,6 +254,7 @@
                 }
             ]
         });
+        
     </script>
     <!-- End Slider Script -->
 

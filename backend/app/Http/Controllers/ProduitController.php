@@ -111,4 +111,17 @@ class ProduitController extends Controller
         $produit->delete(); // Supprime le produit
         return redirect()->route('admin.dashboard')->with('success', 'Produit supprimé avec succès.');
     }
+    public function showw($id)
+{
+    // Récupérer le produit par son ID
+    $produit = Produit::find($id);
+
+    // Vérifier si le produit existe
+    if (!$produit) {
+        abort(404); // Retourne une erreur 404 si le produit n'existe pas
+    }
+
+    // Passer le produit à la vue
+    return view('shop-single', compact('produit'));
+}
 }
