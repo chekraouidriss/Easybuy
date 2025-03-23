@@ -33,9 +33,8 @@ Route::get('/index', function () {
 Route::get('/panier', function () {
     return view('panier');
 });
-Route::get('/shop-single', function () {
-    return view('shop-single');
-});
+// Route pour afficher les détails d'un produit
+Route::get('/shop-single/{id}', [ProduitController::class, 'showw'])->name('shop.single');
 
 Route::get('/sign_up', function () {
     return view('sign_up');
