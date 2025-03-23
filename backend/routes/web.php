@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProduitController;
+use App\Http\Controllers\PanierController;
 
 
 
@@ -45,3 +46,4 @@ Route::post('/produits', [ProduitController::class, 'store'])->name('produits.st
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/produits/{produit}/edit', [ProduitController::class, 'edit'])->name('produits.edit');
 Route::put('/produits/{produit}', [ProduitController::class, 'update'])->name('produits.update');
+Route::get('/panier/details', [PanierController::class, 'getPanierDetails']);

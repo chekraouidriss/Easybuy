@@ -78,69 +78,13 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/img/1.jpg" alt="Product Image" width="50" class="me-3">
-                                            <div>
-                                                <h6 class="mb-0">HP Laptop</h6>
-                                                <small class="text-muted">Catégorie: PC Portable</small>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>2500.00 MAD</td>
-                                    <td>
-                                        <input type="number" class="form-control" value="1" min="1" style="width: 70px;">
-                                    </td>
-                                    <td>2500.00 MAD</td>
-                                    <td>
-                                        <button class="btn btn-danger btn-sm">Supprimer</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/img/2.jpg" alt="Product Image" width="50" class="me-3">
-                                            <div>
-                                                <h6 class="mb-0">Disque Dur Externe</h6>
-                                                <small class="text-muted">Catégorie: Stockage</small>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>500.00 MAD</td>
-                                    <td>
-                                        <input type="number" class="form-control" value="1" min="1" style="width: 70px;">
-                                    </td>
-                                    <td>500.00 MAD</td>
-                                    <td>
-                                        <button class="btn btn-danger btn-sm">Supprimer</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <img src="assets/img/3.jpg" alt="Product Image" width="50" class="me-3">
-                                            <div>
-                                                <h6 class="mb-0">Carte Réseau</h6>
-                                                <small class="text-muted">Catégorie: Réseau</small>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>200.00 MAD</td>
-                                    <td>
-                                        <input type="number" class="form-control" value="1" min="1" style="width: 70px;">
-                                    </td>
-                                    <td>200.00 MAD</td>
-                                    <td>
-                                        <button class="btn btn-danger btn-sm">Supprimer</button>
-                                    </td>
-                                </tr>
+                            <tbody id="panierBody">
+                                <!-- Les produits du panier seront insérés ici dynamiquement n3amasidi -->
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <td colspan="3" class="text-end"><strong>Total</strong></td>
-                                    <td colspan="2"><strong>3200.00 MAD</strong></td>
+                                    <td colspan="2"><strong id="totalPanier">0.00 MAD</strong></td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -239,6 +183,48 @@
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/templatemo.js"></script>
     <script src="assets/js/custom.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    // Récupérer les données du panier via une requête AJAX
+    fetch('/panier/details')
+        .then(response => response.json())
+        .then(data => {
+            const panierBody = document.getElementById('panierBody');
+            let totalPanier = 0;
+
+            data.forEach(produit => {
+                const totalProduit = produit.prix * produit.quantite;
+                totalPanier += totalProduit;
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img src="${produit.image}" alt="${produit.nom}" width="50" class="me-3">
+                            <div>
+                                <h6 class="mb-0">${produit.nom}</h6>
+                                <small class="text-muted">Catégorie: ${produit.categorie}</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td>${produit.prix} MAD</td>
+                    <td>
+                        <input type="number" class="form-control" value="${produit.quantite}" min="1" style="width: 70px;">
+                    </td>
+                    <td>${totalProduit} MAD</td>
+                    <td>
+                        <button class="btn btn-danger btn-sm">Supprimer</button>
+                    </td>
+                `;
+                panierBody.appendChild(row);
+            });
+
+            // Mettre à jour le total du panier
+            document.getElementById('totalPanier').textContent = `${totalPanier.toFixed(2)} MAD`;
+        })
+        .catch(error => console.error('Erreur lors de la récupération des données du panier:', error));
+});
+    </script>
     <!-- End Script -->
 </body>
 </html>

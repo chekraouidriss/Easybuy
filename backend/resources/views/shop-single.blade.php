@@ -107,7 +107,7 @@
                                 <input type="hidden" name="product-title" value="Activewear">
                                 <div class="row">
                                     <div class="col-auto">
-                                    <ul class="list-inline pb-3">
+                                        <ul class="list-inline pb-3">
                                             <li class="list-inline-item text-right">
                                                 Quantity
                                                 <input type="hidden" name="product-quanity" id="product-quanity" value="1">
@@ -221,6 +221,7 @@
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/templatemo.js"></script>
     <script src="assets/js/custom.js"></script>
+    <script src="assets/js/incpanier.js"></script>
     <!-- End Script -->
     <!-- Start Slider Script -->
     <script src="assets/js/slick.min.js"></script>
@@ -259,5 +260,34 @@
     <!-- End Slider Script -->
 
 </body>
+<script> 
+ document.addEventListener('DOMContentLoaded', function() {
+        // Votre code JavaScript ici
+        const btnMinus = document.getElementById('btn-minus');
+        const btnPlus = document.getElementById('btn-plus');
+        const varValue = document.getElementById('var-value');
+        const productQuantity = document.getElementById('product-quanity');
 
+        let quantity = 1;
+
+        function updateQuantity() {
+            varValue.textContent = quantity;
+            productQuantity.value = quantity;
+        }
+
+        btnMinus.addEventListener('click', function() {
+            if (quantity > 1) {
+                quantity--;
+                updateQuantity();
+            }
+        });
+
+        btnPlus.addEventListener('click', function() {
+            quantity++;
+            updateQuantity();
+        });
+
+        updateQuantity();
+    });
+    </script>
 </html>

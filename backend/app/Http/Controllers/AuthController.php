@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Produit;
 use App\Models\Admin;
+use App\Models\Panier;
 use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
@@ -69,45 +70,50 @@ class AuthController extends Controller
 
     // Traiter l'inscription
     public function signup(Request $request)
-{
-    // Valider les données du formulaire
-    $request->validate([
-        'nom' => 'required|string|max:255',
-        'email' => 'required|email|unique:users,email',
-        'password' => 'required|min:8|confirmed',
-        'adresse' => 'required|string|max:255',
-        'ville' => 'required|string|max:100',
-        'code' => 'required|string|max:20',
-        'telephone' => 'required|string|max:20',
-    ], [
-        'nom.required' => 'Le champ nom est obligatoire.',
-        'email.required' => 'Le champ email est obligatoire.',
-        'email.unique' => 'Cet email est déjà utilisé.',
-        'password.required' => 'Le champ mot de passe est obligatoire.',
-        'password.confirmed' => 'La confirmation du mot de passe ne correspond pas.',
-        'adresse.required' => 'Le champ adresse est obligatoire.',
-        'ville.required' => 'Le champ ville est obligatoire.',
-        'code.required' => 'Le champ code postal est obligatoire.',
-        'telephone.required' => 'Le champ téléphone est obligatoire.',
-    ]);
-
-    // Créer un nouvel utilisateur
-    $user = User::create([
-        'name' => $request->nom,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
-        'adresse' => $request->adresse,
-        'ville' => $request->ville,
-        'code_postale' => $request->code,
-        'telephone' => $request->telephone,
-    ]);
-
-    // Connecter l'utilisateur après l'inscription
-    Auth::login($user);
-
-    // Rediriger vers la page shop après inscription
-    return redirect()->route('shop')->with('success', 'Inscription réussie !');
-}
+    {
+        // Valider les données du formulaire
+        $request->validate([
+            'nom' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8|confirmed',
+            'adresse' => 'required|string|max:255',
+            'ville' => 'required|string|max:100',
+            'code' => 'required|string|max:20',
+            'telephone' => 'required|string|max:20',
+        ], [
+            'nom.required' => 'Le champ nom est obligatoire.',
+            'email.required' => 'Le champ email est obligatoire.',
+            'email.unique' => 'Cet email est déjà utilisé.',
+            'password.required' => 'Le champ mot de passe est obligatoire.',
+            'password.confirmed' => 'La confirmation du mot de passe ne correspond pas.',
+            'adresse.required' => 'Le champ adresse est obligatoire.',
+            'ville.required' => 'Le champ ville est obligatoire.',
+            'code.required' => 'Le champ code postal est obligatoire.',
+            'telephone.required' => 'Le champ téléphone est obligatoire.',
+        ]);
+    
+        // Créer un nouvel utilisateur
+        $user = User::create([
+            'name' => $request->nom,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'adresse' => $request->adresse,
+            'ville' => $request->ville,
+            'code_postale' => $request->code,
+            'telephone' => $request->telephone,
+        ]);
+    
+        // Créer un panier pour l'utilisateur
+        Panier::create([
+            'users_id' => $user->id, // Associer le panier à l'utilisateur
+        ]);
+    
+        // Connecter l'utilisateur après l'inscription
+        Auth::login($user);
+    
+        // Rediriger vers la page shop après inscription
+        return redirect()->route('shop')->with('success', 'Inscription réussie !');
+    }
 
     // Afficher la page shop
     public function shop()
