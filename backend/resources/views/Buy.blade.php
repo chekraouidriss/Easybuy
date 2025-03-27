@@ -12,6 +12,12 @@
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
 </head>
 <body>
+@if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
     <nav class="navbar navbar-expand-lg navbar-light shadow"> 
         <div class="container d-flex justify-content-between align-items-center">
             <a class="navbar-brand text-success logo h1 align-self-center" href="index">
@@ -48,34 +54,47 @@
             <b>Paiement</b>
             <div class="payment-cardd-gif"> <img src="assets/img/giff.gif" alt="GIF animé"> </div>
         </div>
-        <form>
-            <!-- Cartes enregistrées -->
-            <span class="payment-card-header">Cartes enregistrées :</span>
-            <div class="payment-row payment-row-vertical">
-                <div class="d-flex align-items-center gap-2">
-                    <img class="img-fluid" src="https://img.icons8.com/color/48/000000/mastercard-logo.png"/>
-                    <input type="text" placeholder="**** **** **** 3193" class="form-control-sm">
-                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#codeVerificationModal">Valider</button>
-                </div>
+        
+        <!-- Cartes enregistrées -->
+        @if($cartes->count() > 0)
+        <span class="payment-card-header">Cartes enregistrées :</span>
+        @foreach($cartes as $carte)
+        <div class="payment-row payment-row-vertical">
+            <div class="d-flex align-items-center gap-2">
+                <!-- Icône de la carte (Visa/Mastercard basé sur le numéro) -->
+                @if(substr($carte->numcart, 0, 1) == '4')
+                <img class="img-fluid" src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa"/>
+                @else
+                <img class="img-fluid" src="https://img.icons8.com/color/48/000000/mastercard-logo.png" alt="Mastercard"/>
+                @endif
+                
+                <input type="text" value="**** **** **** {{ substr($carte->numcart, -4) }}" class="form-control-sm" readonly>
+                
+                <form method="POST" action="{{ route('payment.confirm') }}" class="d-inline">
+                    @csrf
+                    <input type="hidden" name="carte_id" value="{{ $carte->id }}">
+                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#codeVerificationModal-{{ $carte->id }}">
+                        Valider
+                    </button>
+                </form>
             </div>
-            <div class="payment-row payment-row-vertical">
-                <div class="d-flex align-items-center gap-2">
-                    <img class="img-fluid" src="https://img.icons8.com/color/48/000000/visa.png"/>
-                    <input type="text" placeholder="**** **** **** 4296" class="form-control-sm">
-                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#codeVerificationModal">Valider</button>
-                </div>
-            </div>
-            <!-- Ajouter une nouvelle carte -->
+        </div>
+        @endforeach
+        @endif
+        
+        <!-- Formulaire pour ajouter une nouvelle carte -->
+        <form method="POST" action="{{ route('payment.store') }}">
+            @csrf
             <span class="payment-card-header">Ajouter une nouvelle carte :</span>
             <div class="payment-row payment-row-vertical">
                 <div class="d-flex gap-2">
                     <div class="flex-grow-1">
                         <span class="payment-card-inner">Nom du titulaire de la carte</span>
-                        <input type="text" placeholder="Jean Dupont" class="form-control-sm">
+                        <input type="text" name="nom" placeholder="Jean Dupont" class="form-control-sm" required>
                     </div>
                     <div class="flex-grow-1">
                         <span class="payment-card-inner">Numéro de carte</span>
-                        <input type="text" placeholder="5134-5264-4" class="form-control-sm">
+                        <input type="text" name="numcart" placeholder="513452644" class="form-control-sm" required>
                     </div>
                 </div>
             </div>
@@ -83,36 +102,46 @@
                 <div class="d-flex gap-2">
                     <div class="flex-grow-1">
                         <span class="payment-card-inner">Date d'expiration</span>
-                        <input type="text" placeholder="MM/YY" class="form-control-sm">
+                        <input type="text" name="expiration_date" placeholder="MM/YY" class="form-control-sm" required>
                     </div>
                     <div class="flex-grow-1">
                         <span class="payment-card-inner">CVV</span>
-                        <input type="text" placeholder="123" class="form-control-sm">
+                        <input type="password" name="cvv" placeholder="123" class="form-control-sm" required>
                     </div>
                 </div>
             </div>
-            <button class="btn btn-success btn-sm d-flex mx-auto mt-3"><b>Ajouter la carte</b></button>
+            <button type="submit" class="btn btn-success btn-sm d-flex mx-auto mt-3">
+                <b>Ajouter la carte</b>
+            </button>
         </form>
     </div>
-    <!-- Fenêtre modale pour la vérification du code -->
-    <div class="modal fade" id="codeVerificationModal" tabindex="-1" aria-labelledby="codeVerificationModalLabel" aria-hidden="true">
+    
+    <!-- Fenêtres modales pour la vérification du code (une par carte) -->
+    @foreach($cartes as $carte)
+    <div class="modal fade" id="codeVerificationModal-{{ $carte->id }}" tabindex="-1" aria-labelledby="codeVerificationModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="codeVerificationModalLabel">Vérification du code</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <p>Veuillez entrer le code envoyé à votre adresse e-mail pour confirmer le paiement.</p>
-                    <input type="text" class="form-control form-control-sm" placeholder="Entrez le code">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Fermer</button>
-                    <button type="button" class="btn btn-success btn-sm">Confirmer</button>
-                </div>
+                <form method="POST" action="{{ route('payment.confirm') }}">
+                    @csrf
+                    <input type="hidden" name="carte_id" value="{{ $carte->id }}">
+                    <div class="modal-body">
+                        <p>Veuillez entrer le code envoyé à votre adresse e-mail pour confirmer le paiement.</p>
+                        <input type="text" name="verification_code" class="form-control form-control-sm" placeholder="Entrez le code" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-success btn-sm">Confirmer</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+    @endforeach
+    
     <!-- Close Content -->
     <!-- Start Footer -->
     <footer class="bg-dark" id="tempaltemo_footer">

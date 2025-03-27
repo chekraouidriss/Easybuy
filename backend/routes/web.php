@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\PanierController;
-
-
+use App\Http\Controllers\PaymentController;
 
 // Routes pour l'authentification
 Route::get('/log_in', [AuthController::class, 'showLoginForm'])->name('login');
@@ -49,3 +48,9 @@ Route::put('/produits/{produit}', [ProduitController::class, 'update'])->name('p
 Route::get('/panier/details', [PanierController::class, 'getPanierDetails']);
 Route::post('/panier/ajouter', [PanierController::class, 'ajouterAuPanier'])->middleware('auth');
 Route::delete('/panier/supprimer/{produit_id}', [PanierController::class, 'supprimerDuPanier'])->name('panier.supprimer');
+Route::post('/payment/store', [PaymentController::class, 'store'])->name('payment.store')->middleware('auth');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/buy', [PaymentController::class, 'index'])->name('buy');
+    Route::post('/payment/store', [PaymentController::class, 'store'])->name('payment.store');
+    Route::post('/payment/confirm', [PaymentController::class, 'confirm'])->name('payment.confirm');
+});
