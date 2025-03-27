@@ -63,5 +63,23 @@ class PanierController extends Controller
     
         return response()->json(['success' => true]);
     }
+    public function supprimerDuPanier($produit_id)
+{
+    $user = Auth::user();
     
+    if (!$user) {
+        return response()->json(['error' => 'Utilisateur non connecté'], 401);
+    }
+
+    $panier = Panier::where('users_id', $user->id)->first();
+
+    if ($panier) {
+        // Supprimer le produit du panier
+        $panier->produits()->detach($produit_id);
+        
+        return response()->json(['success' => true]);
+    }
+
+    return response()->json(['error' => 'Panier non trouvé'], 404);
+}
 }

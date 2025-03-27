@@ -48,3 +48,4 @@ Route::get('/produits/{produit}/edit', [ProduitController::class, 'edit'])->name
 Route::put('/produits/{produit}', [ProduitController::class, 'update'])->name('produits.update');
 Route::get('/panier/details', [PanierController::class, 'getPanierDetails']);
 Route::post('/panier/ajouter', [PanierController::class, 'ajouterAuPanier'])->middleware('auth');
+Route::delete('/panier/supprimer/{produit_id}', [PanierController::class, 'supprimerDuPanier'])->name('panier.supprimer');

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="assets/css/custom.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
         .btn-outline-light {
             color: #ffffff; /* Texte blanc clair */
@@ -183,8 +184,7 @@
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/templatemo.js"></script>
     <script src="assets/js/custom.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
+    <script> document.addEventListener('DOMContentLoaded', function() {
     // Récupérer les données du panier via une requête AJAX
     fetch('/panier/details')
         .then(response => response.json())
@@ -213,7 +213,7 @@
                     </td>
                     <td>${totalProduit} MAD</td>
                     <td>
-                        <button class="btn btn-danger btn-sm">Supprimer</button>
+                        <button class="btn btn-danger btn-sm" onclick="supprimerProduit(${produit.id})">Supprimer</button>
                     </td>
                 `;
                 panierBody.appendChild(row);
@@ -224,7 +224,27 @@
         })
         .catch(error => console.error('Erreur lors de la récupération des données du panier:', error));
 });
-    </script>
+
+// Fonction pour supprimer un produit
+function supprimerProduit(produitId) {
+    if (confirm('Êtes-vous sûr de vouloir supprimer ce produit du panier ?')) {
+        fetch(`/panier/supprimer/${produitId}`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Recharger la page pour voir les changements
+                window.location.reload();
+            }
+        })
+        .catch(error => console.error('Erreur lors de la suppression:', error));
+    }
+}</script>
     <!-- End Script -->
 </body>
 </html>
