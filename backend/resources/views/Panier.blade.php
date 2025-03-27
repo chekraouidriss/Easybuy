@@ -245,6 +245,5 @@ function supprimerProduit(produitId) {
         .catch(error => console.error('Erreur lors de la suppression:', error));
     }
 }</script>
-    <!-- End Script -->
 </body>
 </html>
