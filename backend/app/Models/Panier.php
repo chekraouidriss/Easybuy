@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Panier extends Model
 {
     use HasFactory;
-    use HasFactory;
 
     protected $table = 'Panier'; // Nom de la table dans la base de données
     protected $primaryKey = 'id'; // Clé primaire de la table
@@ -19,9 +18,14 @@ class Panier extends Model
         'users_id', // Ajoute cette ligne
     ];
 
-    // Relation avec la table `panier_produits`
-    public function produits()
-    {
-        return $this->hasMany(PanierProduit::class, 'Panier_id', 'id');
+    public function produits() {
+        return $this->belongsToMany(Produit::class, 'panier_produits')
+                    ->withPivot('quantite'); // snake_case
     }
+
+    // Dans app/Models/Panier.php
+    public function user()
+{
+    return $this->belongsTo(User::class, 'users_id');
+}
 }

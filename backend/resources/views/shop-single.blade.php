@@ -122,9 +122,44 @@
                                 <div class="col d-grid">
                                     <a class="btn btn-success btn-lg" href="{{ route('shop') }}">Retour</a>
                                 </div>
-                                    <div class="col d-grid">
-                                        <a href="panier" class="btn btn-success btn-lg">Ajouter au Panier</a>
-                                    </div>
+                                <div class="col d-grid">
+                                    <button type="button" class="btn btn-success btn-lg" id="btn-ajouter-panier" data-produit-id="{{ $produit->id }}">
+                                       Ajouter au Panier
+                                    </button>
+                                </div>
+<script>
+function ajouterAuPanier(produitId, quantite) {
+    fetch('/panier/ajouter', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({
+            produit_id: produitId,
+            quantite: quantite
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erreur réseau');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.success) {
+            window.location.href = '/panier';
+        } else {
+            alert(data.message || 'Erreur lors de l\'ajout au panier');
+        }
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+        alert('Une erreur est survenue: ' + error.message);
+    });
+}
+</script>
+</div>
                                 </div>
                             </form>
 
@@ -216,15 +251,14 @@
     </footer>
     <!-- End Footer -->
     <!-- Start Script -->
-    <script src="assets/js/jquery-1.11.0.min.js"></script>
-    <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/templatemo.js"></script>
-    <script src="assets/js/custom.js"></script>
-    <script src="assets/js/incpanier.js"></script>
+    <script src="{{ asset('assets/js/jquery-1.11.0.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery-migrate-1.2.1.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/js/templatemo.js') }}"></script>
+    <script src="{{ asset('assets/js/custom.js') }}"></script>
+    <script src="{{ asset('assets/js/slick.min.js') }}"></script>
     <!-- End Script -->
     <!-- Start Slider Script -->
-    <script src="assets/js/slick.min.js"></script>
     <script>
         $('#carousel-related-product').slick({
             infinite: true,
@@ -260,9 +294,9 @@
     <!-- End Slider Script -->
 
 </body>
-<script> 
- document.addEventListener('DOMContentLoaded', function() {
-        // Votre code JavaScript ici
+<script>
+    // Gestion de la quantité
+    document.addEventListener('DOMContentLoaded', function() {
         const btnMinus = document.getElementById('btn-minus');
         const btnPlus = document.getElementById('btn-plus');
         const varValue = document.getElementById('var-value');
@@ -288,6 +322,71 @@
         });
 
         updateQuantity();
+
+        // Gestion de l'ajout au panier
+        document.getElementById('btn-ajouter-panier').addEventListener('click', function() {
+            const produitId = this.getAttribute('data-produit-id');
+            const quantite = parseInt(document.getElementById('var-value').textContent);
+            
+            fetch('/panier/ajouter', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    produit_id: produitId,
+                    quantite: quantite
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erreur réseau');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    window.location.href = '/panier';
+                } else {
+                    alert(data.message || 'Erreur lors de l\'ajout au panier');
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Une erreur est survenue: ' + error.message);
+            });
+        });
+
+        // Slider
+        $('#carousel-related-product').slick({
+            infinite: true,
+            arrows: false,
+            slidesToShow: 4,
+            slidesToScroll: 3,
+            dots: true,
+            responsive: [{
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 3
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 3
+                }
+            }]
+        });
     });
     </script>
 </html>

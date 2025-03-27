@@ -27,4 +27,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    // Dans app/Models/User.php
+    public function panier()
+{
+    return $this->hasOne(Panier::class, 'users_id');
+}
 }

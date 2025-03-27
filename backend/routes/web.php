@@ -47,3 +47,4 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/produits/{produit}/edit', [ProduitController::class, 'edit'])->name('produits.edit');
 Route::put('/produits/{produit}', [ProduitController::class, 'update'])->name('produits.update');
 Route::get('/panier/details', [PanierController::class, 'getPanierDetails']);
+Route::post('/panier/ajouter', [PanierController::class, 'ajouterAuPanier'])->middleware('auth');

@@ -13,35 +13,55 @@ class PanierController extends Controller
     {
         // Récupérer l'utilisateur connecté
         $user = Auth::user();
-
+    
         if (!$user) {
             return response()->json(['error' => 'Utilisateur non connecté'], 401);
         }
-
-        // Récupérer ou créer le panier de l'utilisateur
-        $panier = Panier::firstOrCreate(
-            ['users_id' => $user->id], // Condition pour trouver le panier
-            ['users_id' => $user->id]  // Données à créer si le panier n'existe pas
-        );
-
-        // Récupérer les produits du panier avec leurs détails
-        $panierProduits = PanierProduit::with('produit')
-            ->where('Panier_id', $panier->id)
-            ->get();
-
-        $produits = [];
-        foreach ($panierProduits as $panierProduit) {
-            $produit = $panierProduit->produit; // Récupérer les détails du produit via la relation
-            $produits[] = [
+    
+        // Récupérer le panier avec ses produits en une seule requête
+        $panier = Panier::with(['produits' => function($query) {
+            $query->select('produits.id', 'Nom', 'Prix', 'Categorie', 'SrcImage')
+                  ->withPivot('quantite');
+        }])->where('users_id', $user->id)->first();
+    
+        // Si le panier n'existe pas, retourner un tableau vide
+        if (!$panier) {
+            return response()->json([]);
+        }
+    
+        // Formater les données
+        $produits = $panier->produits->map(function($produit) {
+            return [
                 'id' => $produit->id,
                 'nom' => $produit->Nom,
                 'categorie' => $produit->Categorie,
                 'prix' => $produit->Prix,
-                'quantite' => $panierProduit->Quantite,
-                'image' => $produit->SrcImage,
+                'quantite' => $produit->pivot->quantite, // Notez le 'pivot' ici
+                'image' => $produit->SrcImage
             ];
-        }
-
+        });
+    
         return response()->json($produits);
     }
+    public function ajouterAuPanier(Request $request) {
+        $request->validate([
+            'produit_id' => 'required|exists:produits,id',
+            'quantite'   => 'required|integer|min:1'
+        ]);
+    
+        $user = Auth::user();
+        
+        // Solution plus robuste
+        $panier = Panier::firstOrCreate(
+            ['users_id' => $user->id],
+            ['users_id' => $user->id]
+        );
+    
+        $panier->produits()->syncWithoutDetaching([
+            $request->produit_id => ['quantite' => $request->quantite]
+        ]);
+    
+        return response()->json(['success' => true]);
+    }
+    
 }
