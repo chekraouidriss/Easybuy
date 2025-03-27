@@ -82,4 +82,5 @@ class PanierController extends Controller
 
     return response()->json(['error' => 'Panier non trouvé'], 404);
 }
+
 }
