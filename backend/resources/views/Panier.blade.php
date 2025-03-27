@@ -52,10 +52,20 @@
                     </ul>
                 </div>
                 <div class="navbar align-self-center d-flex">
-    <a class="nav-icon position-relative text-decoration-none" href="/panier">
-        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">3</span>
-    </a> 
+               <!-- Dans resources/views/layouts/app.blade.php ou resources/views/panier.blade.php -->
+<a class="nav-icon position-relative text-decoration-none" href="/panier">
+    <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+    
+    <!-- Affiche le nombre d'articles si l'utilisateur est connecté -->
+    @auth
+        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
+            {{ Auth::user()->panier->produits->sum('pivot.quantite') ?? 0 }}
+        </span>
+    @else
+        <!-- Si l'utilisateur n'est pas connecté, affiche 0 -->
+        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">0</span>
+    @endauth
+</a>
 </div>
             </div>
 
@@ -244,6 +254,15 @@ function supprimerProduit(produitId) {
         })
         .catch(error => console.error('Erreur lors de la suppression:', error));
     }
-}</script>
+}
+function updateCartCount(count) {
+    document.getElementById('cart-count').textContent = count;
+}
+
+// Exemple après suppression :
+axios.delete(`/panier/${produitId}`)
+    .then(response => {
+        updateCartCount(response.data.newCount); // Renvoie le nouveau count depuis le contrôleur
+    });</script>
 </body>
 </html>

@@ -61,7 +61,10 @@ class PanierController extends Controller
             $request->produit_id => ['quantite' => $request->quantite]
         ]);
     
-        return response()->json(['success' => true]);
+        return response()->json([
+            'success' => true,
+            'newCount' => $panier->produits->sum('pivot.quantite')
+        ]);
     }
     public function supprimerDuPanier($produit_id)
 {
@@ -80,7 +83,10 @@ class PanierController extends Controller
         return response()->json(['success' => true]);
     }
 
-    return response()->json(['error' => 'Panier non trouvé'], 404);
+    return response()->json([
+        'success' => true,
+        'newCount' => $panier->produits->sum('pivot.quantite')
+    ]);
 }
 
 }

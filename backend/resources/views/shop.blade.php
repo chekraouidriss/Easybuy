@@ -83,9 +83,18 @@
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
                     </a>
                     <a class="nav-icon position-relative text-decoration-none" href="/panier">
-                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
-                    </a>
+    <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+    
+    <!-- Affiche le nombre d'articles si l'utilisateur est connecté -->
+    @auth
+        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
+            {{ Auth::user()->panier->produits->sum('pivot.quantite') ?? 0 }}
+        </span>
+    @else
+        <!-- Si l'utilisateur n'est pas connecté, affiche 0 -->
+        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">0</span>
+    @endauth
+</a>
                 </div>
             </div>
         </div>
