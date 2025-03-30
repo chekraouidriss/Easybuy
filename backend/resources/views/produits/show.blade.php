@@ -8,7 +8,8 @@
 </head>
 <body class="container mt-5">
 
-    <h1>{{ $produit->nom }}</h1>
+    <h1>{{ $produit->nom }}</h1> 
+    <!-- Had l variable dyal produit fin kayna ? --> 
     <p><strong>Description :</strong> {{ $produit->description }}</p>
     <p><strong>Prix :</strong> {{ $produit->prix }} €</p>
     <p><strong>Stock :</strong> {{ $produit->stock }}</p>

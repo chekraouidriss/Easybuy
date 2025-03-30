@@ -111,7 +111,7 @@
                     <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody> 
                 @forelse($produits as $produit)
                     <tr>
                         <td>{{ $produit->id }}</td>
