@@ -70,13 +70,19 @@ remove_popup.addEventListener("click", (event) => {
 let remove_product_btn2 = document.querySelectorAll(".opeartions1")
 let modify_popup = document.querySelector(".modify-popup");
 let centred_div2 = document.querySelector(".modify-popup .centred-div");
-let ModifyForm = document.querySelector("#deleteForm");  // Formulaire de suppression
-let productIdInput2 = document.querySelector("#productId2");  // Champ caché pour l'ID du produit
+
+let modifyForm = document.querySelector("#modifyForm"); 
+let modifyProductIdInput = document.querySelector("#modifyProductId");  
+let modifyIdInput = document.querySelector("#IDM");
 
 modify_popup.classList.toggle("hide-2");
 
 remove_product_btn2.forEach(btn => {
     btn.addEventListener("click",()=>{
+        let productId = btn.id;  // Récupère l'ID du produit
+        modifyProductIdInput.value = productId;  // Met à jour le champ caché
+        modifyIdInput.value = "#" + productId;  // Affiche l'ID dans le champ désactivé
+        modifyForm.action = '/produits/' + productId + '/modifier';
         modify_popup.classList.toggle("hide-2");
     })
 });

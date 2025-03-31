@@ -89,15 +89,18 @@
         <div class="nav">
             <div class="option active">
                 <div class="icon" style="background-image: url('assets/icons/home.png');" ></div>
-                <a href="./home.html">Acceuil</a>
+                <a href="./admin">Acceuil</a>
             </div>
             <div class="option">
                 <div class="icon" style="background-image: url('assets/icons/Product.png');" ></div>
-                <a href="./products.html">Produits</a>
+                <a href="./produits">Produits</a>
             </div>
             <div class="option">
-                <div class="icon" style="background-image: url('assets/icons/exit.png');" ></div>
-                <a href="#">Deconnexion</a>
+            <div class="icon" style="background-image: url('assets/icons/exit.png');"></div>
+            <form action="{{ route('logout') }}" method="POST" id="logoutForm">
+                @csrf
+                <a href="#" onclick="document.getElementById('logoutForm').submit(); return false;">Déconnexion</a>
+            </form>
             </div>
         </div>
 

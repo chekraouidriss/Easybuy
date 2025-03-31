@@ -46,6 +46,9 @@ Route::get('/products', function () {
     return view('products');
 });
 
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::put('/produits/{id}/modifier', [ProduitController::class, 'update'])->name('produits.modifier');
 Route::delete('/produits/{id}/supprimer', [ProduitController::class, 'destroy'])->name('produits.supprimer');
 Route::get('/produits', [ProduitController::class, 'index'])->name('products.index');
 Route::post('/produits/store', [ProduitController::class, 'store'])->name('products.store');

@@ -54,6 +54,58 @@
     <div class="modify-popup">
         <div class="centred-div">
             <div class="icon top-modify" style="background-image: url('assets/icons/actualise.png');" ></div>
+            
+            <form action="{{ route('produits.modifier', '') }}" method="POST" id="modifyForm" enctype="multipart/form-data">
+    @csrf
+    @method('PUT') <!-- Spécifie que la requête est de type PUT -->
+
+    <!-- Champ caché pour l'ID du produit -->
+    <input type="hidden" id="modifyProductId" name="id" value="">
+
+    <div class="line">
+        <label for="IDM">ID : </label>
+        <input id="IDM" type="text" class="form-control" disabled required>
+    </div>
+
+    <div class="line">
+        <label for="Nom">Nom : </label>
+        <input id="Nom" type="text" class="form-control" name="Nom" required>
+    </div>
+
+    <div class="line">
+        <label for="Prix">Prix : </label>
+        <input id="Prix" type="number" class="form-control" name="Prix" required>
+    </div>
+
+    <div class="line">
+        <label for="Stock">Stock : </label>
+        <input id="Stock" type="number" class="form-control" name="QntStock" required>
+    </div>
+
+    <div class="line">
+        <label for="cars">Catégorie:</label>
+        <select id="cars" name="Categorie" class="form-control" required>
+            <option value="Laptop">Laptop</option>
+            <option value="Desktop">Desktop</option>
+        </select>
+    </div>
+
+    <div class="line">
+        <label for="SrcImage">Image du Produit</label>
+        <input type="file" class="form-control" id="SrcImage" name="SrcImage">
+    </div>
+
+    <div class="line">
+        <input type="submit" class="btn btn-primary" value="Modifier">
+    </div>
+</form>
+
+
+        </div>
+    </div>
+    <!-- <div class="modify-popup">
+        <div class="centred-div">
+            <div class="icon top-modify" style="background-image: url('assets/icons/actualise.png');" ></div>
             <form action="">
 
                 <div class="line">
@@ -90,7 +142,10 @@
 
             </form>
         </div>
-    </div>
+    </div> -->
+
+
+
 
     <!-- Add product popup -->
 
@@ -170,8 +225,8 @@
             <div class="line">
                 <label for="Categorie">Catégorie : </label>
                 <select id="Categorie" name="Categorie" required>
-                    <option value="Electronique">Laptop</option>
-                    <option value="Habillage">Desktop</option>
+                    <option value="Laptop">Laptop</option>
+                    <option value="Desktop">Desktop</option>
                 </select>
             </div>
 
@@ -202,16 +257,20 @@
         <div class="nav">
             <div class="option">
                 <div class="icon" style="background-image: url('assets/icons/home.png');" ></div>
-                <a href="./home.html">Acceuil</a>
+                <a href="./admin">Acceuil</a>
             </div>
             <div class="option active">
                 <div class="icon" style="background-image: url('assets/icons/Product.png');" ></div>
-                <a href="./products.html">Produits</a>
+                <a href="./produits">Produits</a>
             </div>
             <div class="option">
-                <div class="icon" style="background-image: url('assets/icons/exit.png');" ></div>
-                <a href="#">Deconnexion</a>
+            <div class="icon" style="background-image: url('assets/icons/exit.png');"></div>
+            <form action="{{ route('logout') }}" method="POST" id="logoutForm">
+                @csrf
+                <a href="#" onclick="document.getElementById('logoutForm').submit(); return false;">Déconnexion</a>
+            </form>
             </div>
+
         </div>
 
         <div class="exit">

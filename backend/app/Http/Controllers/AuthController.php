@@ -125,8 +125,9 @@ class AuthController extends Controller
         Auth::logout(); // Déconnecter l'utilisateur
         $request->session()->invalidate(); // Invalider la session
         $request->session()->regenerateToken(); // Régénérer le token CSRF
-        return redirect('/'); // Rediriger vers la page d'accueil
+        return redirect('/index'); // Rediriger vers la page d'accueil
     }
+
     public function search(Request $request)
 {
     // Récupérer le terme de recherche depuis la requête
