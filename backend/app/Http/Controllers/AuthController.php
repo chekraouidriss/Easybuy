@@ -148,8 +148,14 @@ public function adminDashboard()
     $ruptureDeStock = Produit::where('QntStock', '=', 0)->count();
     $produits = Produit::all(); // Récupérer tous les produits
 
+    // 4 derniers produits (triés par ID décroissant)
+    $derniersProduits = Produit::orderBy('id', 'desc')
+                              ->take(4)
+                              ->get(['id', 'Nom', 'QntStock', 'Prix', 'SrcImage']);
+
+
     // Passer les données à la vue admin
-    return view('admin', compact('totalProduits', 'produitsEnStock', 'ruptureDeStock', 'produits'));
+    return view('admin', compact('totalProduits', 'produitsEnStock', 'ruptureDeStock', 'produits','derniersProduits'));
 }
 
 

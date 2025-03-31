@@ -8,10 +8,17 @@ use App\Models\Produit;
 class ProduitController extends Controller
 {
     // ✅ Afficher tous les produits
+    // public function index()
+    // {
+    //     $produits = Produit::all();
+    //     return view('produits.index', compact('produits'));
+
+    // }
+
     public function index()
     {
         $produits = Produit::all();
-        return view('produits.index', compact('produits'));
+        return view('products', compact('produits')); // Assure-toi que la vue est bien dans resources/views/products.blade.php
     }
 
     // ✅ Afficher le formulaire d'ajout de produit
@@ -19,6 +26,7 @@ class ProduitController extends Controller
     {
         return view('produits.create');
     }
+
 
     // ✅ Ajouter un produit
     public function store(Request $request)
@@ -29,6 +37,7 @@ class ProduitController extends Controller
             'Prix' => 'required|numeric',
             'QntStock' => 'required|integer',
             'Categorie' => 'required|string|max:255',
+            'Description' => 'required|string|max:1000',
             'SrcImage' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
         ]);
     
@@ -38,6 +47,7 @@ class ProduitController extends Controller
         $produit->Prix = $request->Prix;
         $produit->QntStock = $request->QntStock;
         $produit->Categorie = $request->Categorie;
+        $produit->Description = $request->Description;
     
         // Gestion de l'image
         if ($request->hasFile('SrcImage')) {
@@ -50,7 +60,7 @@ class ProduitController extends Controller
         $produit->save();
     
         // Redirection vers /produits
-        return redirect()->route('admin.dashboard')->with('success', 'Produit supprimé avec succès.');
+        return redirect()->route('products.index')->with('success', 'Produit ajouté avec succès.');
     }
     
     // ✅ Afficher un produit spécifique
@@ -106,9 +116,23 @@ class ProduitController extends Controller
     return redirect()->route('admin.dashboard')->with('success', 'Produit supprimé avec succès.');
 }
     // ✅ Supprimer un produit
-    public function destroy(Produit $produit)
-    {
-        $produit->delete(); // Supprime le produit
-        return redirect()->route('admin.dashboard')->with('success', 'Produit supprimé avec succès.');
-    }
+    // public function destroy(Produit $produit)
+    // {
+    //     $produit->delete(); // Supprime le produit
+    //     return redirect()->route('admin.dashboard')->with('success', 'Produit supprimé avec succès.');
+    // }
+
+    public function destroy(Request $request)
+{
+    $productId = $request->input('productId');  // Get the product ID from the hidden input
+
+    // Find the product by ID and delete it
+    $produit = Produit::findOrFail($productId);
+    $produit->delete();
+
+    // Redirect back to the products page with a success message
+    return redirect()->route('produits.index')->with('success', 'Produit supprimé avec succès.');
+}
+
+    
 }
