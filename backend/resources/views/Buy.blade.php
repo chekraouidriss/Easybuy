@@ -59,27 +59,25 @@
         @if($cartes->count() > 0)
         <span class="payment-card-header">Cartes enregistrées :</span>
         @foreach($cartes as $carte)
-        <div class="payment-row payment-row-vertical">
-            <div class="d-flex align-items-center gap-2">
-                <!-- Icône de la carte (Visa/Mastercard basé sur le numéro) -->
-                @if(substr($carte->numcart, 0, 1) == '4')
-                <img class="img-fluid" src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa"/>
-                @else
-                <img class="img-fluid" src="https://img.icons8.com/color/48/000000/mastercard-logo.png" alt="Mastercard"/>
-                @endif
-                
-                <input type="text" value="**** **** **** {{ substr($carte->numcart, -4) }}" class="form-control-sm" readonly>
-                
-                <form method="POST" action="{{ route('payment.confirm') }}" class="d-inline">
-                    @csrf
-                    <input type="hidden" name="carte_id" value="{{ $carte->id }}">
-                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#codeVerificationModal-{{ $carte->id }}">
-                        Valider
-                    </button>
-                </form>
-            </div>
-        </div>
-        @endforeach
+<div class="payment-row payment-row-vertical">
+    <div class="d-flex align-items-center gap-2">
+        @if(substr($carte->numcart, 0, 1) == '4')
+        <img class="img-fluid" src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa"/>
+        @else
+        <img class="img-fluid" src="https://img.icons8.com/color/48/000000/mastercard-logo.png" alt="Mastercard"/>
+        @endif
+        
+        <input type="text" value="**** **** **** {{ substr($carte->numcart, -4) }}" class="form-control-sm" readonly>
+        <form method="POST" action="{{ route('payment.confirm') }}" class="d-inline">
+            @csrf
+            <input type="hidden" name="carte_id" value="{{ $carte->id }}">
+            <button type="submit" class="btn btn-sm btn-success">
+                Valider
+            </button>
+        </form>
+    </div>
+</div>
+@endforeach
         @endif
         
         <!-- Formulaire pour ajouter une nouvelle carte -->

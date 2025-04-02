@@ -5,7 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\PanierController;
 use App\Http\Controllers\PaymentController;
-
+use Illuminate\Support\Facades\Mail;
 // Routes pour l'authentification
 Route::get('/log_in', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/signup', [AuthController::class, 'signup'])->name('signup.submit');
@@ -54,3 +54,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/payment/store', [PaymentController::class, 'store'])->name('payment.store');
     Route::post('/payment/confirm', [PaymentController::class, 'confirm'])->name('payment.confirm');
 });
+// Dans routes/web.php
+Route::get('/test-email', function() {
+    Mail::to('chekraouidriss1@gmail.com')->send(new \App\Mail\PaymentConfirmationMail('123456'));
+    return "Email envoyé !";
+});
+Route::post('/payment/confirm', [PaymentController::class, 'confirm'])->name('payment.confirm');
+Route::post('/payment/verify', [PaymentController::class, 'verifyCode'])->name('payment.verify');
+Route::get('/payment/success', function() {
+    return view('payment.success');
+})->name('payment.success');
