@@ -1,1 +1,5 @@
-ssssssssssssssssssss
+<?php
+// Redirection vers la page d'accueil
+header("Location: ./index.php");
+exit();
+?>

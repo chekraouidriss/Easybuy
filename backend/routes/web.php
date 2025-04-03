@@ -33,12 +33,29 @@ Route::get('/index', function () {
 Route::get('/panier', function () {
     return view('panier');
 });
+
 // Route pour afficher les détails d'un produit
 Route::get('/shop-single/{id}', [ProduitController::class, 'showw'])->name('shop.single');
+
+Route::get('/shop-single', function () {
+    return view('shop-single');
+});
 
 Route::get('/sign_up', function () {
     return view('sign_up');
 });
+
+Route::get('/products', function () {
+    return view('products');
+});
+
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::put('/produits/{id}/modifier', [ProduitController::class, 'update'])->name('produits.modifier');
+Route::delete('/produits/{id}/supprimer', [ProduitController::class, 'destroy'])->name('produits.supprimer');
+Route::get('/produits', [ProduitController::class, 'index'])->name('products.index');
+Route::post('/produits/store', [ProduitController::class, 'store'])->name('products.store');
+Route::get('/products', [ProduitController::class, 'index'])->name('products.index');
 Route::get('/admin', [AuthController::class, 'adminDashboard'])->name('admin.dashboard');
 Route::resource('produits', ProduitController::class);
 Route::post('/produits', [ProduitController::class, 'store'])->name('produits.store');
