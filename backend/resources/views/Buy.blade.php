@@ -12,18 +12,19 @@
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
 </head>
 <body>
-<div class="position-fixed top-0 end-0 p-3" style="z-index: 9999">
+<div class="flash-messages">
         @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
+            <div class="alert alert-success alert-dismissible fade show">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
         @endif
+
         @if(session('error'))
-        <div class="alert alert-danger alert-dismissible fade show">
-            {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
+            <div class="alert alert-danger alert-dismissible fade show">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
         @endif
     </div>
     <nav class="navbar navbar-expand-lg navbar-light shadow"> 

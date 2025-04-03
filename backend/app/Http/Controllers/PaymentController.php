@@ -77,7 +77,6 @@ class PaymentController extends Controller
             return back()->with('error', 'Erreur lors de l\'envoi du code');
         }
     }
-    
     public function verifyCode(Request $request)
 {
     $request->validate([
@@ -94,9 +93,6 @@ class PaymentController extends Controller
     if ($request->verification_code !== $storedCode['code']) {
         return redirect()->back()->with('error', 'Code invalide. Veuillez réessayer.');
     }
-
-    // Si code valide
-    session()->forget('verification_code');
     return redirect()->back()->with('success', 'Paiement confirmé avec succès !');
 }
 }
