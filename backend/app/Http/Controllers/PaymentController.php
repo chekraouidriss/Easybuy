@@ -45,58 +45,58 @@ class PaymentController extends Controller
     }
 
     public function confirm(Request $request)
-{
-    $validated = $request->validate([
-        'carte_id' => 'required|exists:paymentcarte,id',
-        'verification_code' => 'sometimes|required'
-    ]);
-
-    try {
-        // Récupérer la carte avec l'utilisateur associé
-        $carte = Paymentcarte::with('user')->findOrFail($validated['carte_id']);
-        
-        // Vérifier que l'utilisateur existe et a un email valide
-        if (!$carte->user || !filter_var($carte->user->email, FILTER_VALIDATE_EMAIL)) {
-            throw new \Exception("Email utilisateur invalide");
-        }
-
-        // Générer un code de vérification
-        $verificationCode = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
-
-        // Envoyer l'email de confirmation
-        Mail::to($carte->user->email)
-           ->send(new PaymentConfirmationMail($verificationCode));
-
-        // Stocker le code en session pour validation ultérieure
-        session()->put('verification_code', [
-            'code' => $verificationCode,
-            'expires' => now()->addMinutes(15),
-            'carte_id' => $carte->id
+    {
+        $validated = $request->validate([
+            'carte_id' => 'required|exists:paymentcarte,id',
         ]);
-
-        return back()->with('success', 'Code de confirmation envoyé à votre email');
-
-    } catch (\Exception $e) {
-        Log::error("Erreur envoi email: ".$e->getMessage());
-        return back()->with('error', 'Erreur lors de l\'envoi du code de confirmation');
+    
+        try {
+            $carte = Paymentcarte::with('user')->findOrFail($validated['carte_id']);
+            
+            if (!$carte->user || !filter_var($carte->user->email, FILTER_VALIDATE_EMAIL)) {
+                throw new \Exception("Email utilisateur invalide");
+            }
+    
+            $verificationCode = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+    
+            Mail::to($carte->user->email)
+               ->send(new PaymentConfirmationMail($verificationCode));
+    
+            // Stocke le code ET l'ID de la carte pour la modale
+            session()->put('verification_code', [
+                'code' => $verificationCode,
+                'expires' => now()->addMinutes(15),
+                'carte_id' => $carte->id
+            ]);
+    
+            return back()
+                ->with('success', 'Code de confirmation envoyé à votre email. Confirmez votre code.');
+    
+        } catch (\Exception $e) {
+            Log::error("Erreur envoi email: ".$e->getMessage());
+            return back()->with('error', 'Erreur lors de l\'envoi du code');
+        }
     }
-}
+    
     public function verifyCode(Request $request)
 {
+    $request->validate([
+        'verification_code' => 'required|digits:6',
+        'carte_id' => 'required|exists:paymentcarte,id'
+    ]);
+
     $storedCode = session('verification_code');
-    
+
     if (!$storedCode || now()->gt($storedCode['expires'])) {
-        return back()->with('error', 'Code expiré ou invalide');
+        return redirect()->back()->with('error', 'Code expiré ! Veuillez recommencer.');
     }
 
-    if ($request->input('code') !== $storedCode['code']) {
-        return back()->with('error', 'Code incorrect');
+    if ($request->verification_code !== $storedCode['code']) {
+        return redirect()->back()->with('error', 'Code invalide. Veuillez réessayer.');
     }
 
-    // Code valide - procéder au paiement
+    // Si code valide
     session()->forget('verification_code');
-    
-    return redirect()->route('payment.success')
-                   ->with('success', 'Paiement confirmé!');
+    return redirect()->back()->with('success', 'Paiement confirmé avec succès !');
 }
 }

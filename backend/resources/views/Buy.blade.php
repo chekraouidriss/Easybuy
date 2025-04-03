@@ -12,12 +12,20 @@
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
 </head>
 <body>
-@if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 9999">
+        @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        @endif
+        @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        @endif
     </div>
-@endif
     <nav class="navbar navbar-expand-lg navbar-light shadow"> 
         <div class="container d-flex justify-content-between align-items-center">
             <a class="navbar-brand text-success logo h1 align-self-center" href="index">
@@ -116,28 +124,28 @@
     
     <!-- Fenêtres modales pour la vérification du code (une par carte) -->
     @foreach($cartes as $carte)
-    <div class="modal fade" id="codeVerificationModal-{{ $carte->id }}" tabindex="-1" aria-labelledby="codeVerificationModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="codeVerificationModalLabel">Vérification du code</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form method="POST" action="{{ route('payment.confirm') }}">
-                    @csrf
-                    <input type="hidden" name="carte_id" value="{{ $carte->id }}">
-                    <div class="modal-body">
-                        <p>Veuillez entrer le code envoyé à votre adresse e-mail pour confirmer le paiement.</p>
-                        <input type="text" name="verification_code" class="form-control form-control-sm" placeholder="Entrez le code" required>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Fermer</button>
-                        <button type="submit" class="btn btn-success btn-sm">Confirmer</button>
-                    </div>
-                </form>
+    <div class="modal fade" id="codeVerificationModal-{{ $carte->id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Vérification du code</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <form method="POST" action="{{ route('payment.verify') }}">
+                @csrf
+                <input type="hidden" name="carte_id" value="{{ $carte->id }}">
+                <div class="modal-body">
+                    <p>Un code a été envoyé à votre email. Entrez-le ci-dessous :</p>
+                    <input type="text" name="verification_code" class="form-control" placeholder="123456" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-success">Confirmer</button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
     @endforeach
     
     <!-- Close Content -->
@@ -228,6 +236,26 @@
     <script src="assets/js/templatemo.js"></script>
     <script src="assets/js/custom.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Après les modales existantes, ajoute ce script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 1. Récupération sécurisée de l'ID depuis la session Laravel
+        const carteId = parseInt("{{ session('verification_code.carte_id') ?? 0 }}"); 
+
+        // 2. Vérification du message de succès (version JS compatible)
+        const successMessage = "{{ session('success') ?? '' }}";
+        const shouldShowModal = successMessage.includes('Code de confirmation envoyé');
+
+        // 3. Affichage conditionnel de la modale
+        if (shouldShowModal && carteId > 0) {
+            const modalElement = document.getElementById(`codeVerificationModal-${carteId}`);
+            
+            if (modalElement) {
+                new bootstrap.Modal(modalElement).show();
+            }
+        }
+    });
+</script>
     <!-- End Script -->
 </body>
 </html>
