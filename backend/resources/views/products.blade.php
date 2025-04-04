@@ -454,7 +454,7 @@
             </tbody> -->
             @foreach ($produits as $product)
             <tr>
-                <td style="background-image: url({{ asset($product->SrcImage) }});"></td>
+                <td style="background-image: url('{{ asset($product->SrcImage) }}');"></td>
                 <td>{{ $product->id }}</td>
                 <td>{{ $product->Nom }}</td>
                 <td>{{ $product->Prix }} DH</td>

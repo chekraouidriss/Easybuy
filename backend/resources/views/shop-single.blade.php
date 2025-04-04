@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.min.css') }}">
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
     <style>
         .btn-outline-light {
             color: #ffffff; /* Texte blanc clair */
@@ -36,17 +37,17 @@
             <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index">Accueil</a>
+                    <li class="nav-item">
+                            <a class="nav-link" href="/index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about">À Propos</a>
+                            <a class="nav-link" href="/about">À Propos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="shop">Boutique</a>
+                            <a class="nav-link" href="/shop">Boutique</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contact">Contact</a>
+                            <a class="nav-link" href="/contact">Contact</a>
                         </li>
                     </ul>
                 </div>

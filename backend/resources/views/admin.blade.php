@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>Welcome back !!</title>
+    <title>Admin Dashboard !!</title>
     <style>
         .content-table tbody tr td  {        
             background-size: auto 90%;
@@ -115,7 +115,7 @@
 
     <main>
         <div class="header">
-            <p>Welcome back 🔥</p>
+            <p>Statistiques récentes 🔥</p>
         </div>
         <div class="general-infos">
             <div class="cart">
@@ -156,7 +156,7 @@
     <script src="assets/js/script.js" ></script>
     <script>
     // Convertir les données PHP en JSON pour JavaScript
-    const produitsData = @json($derniersProduits);
+    const produitsData = <?php echo json_encode($derniersProduits); ?>;
     
     // Extraire les noms et quantités
     const produitNoms = produitsData.map(produit => produit.Nom);
