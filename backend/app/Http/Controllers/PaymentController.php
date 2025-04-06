@@ -94,5 +94,9 @@ class PaymentController extends Controller
         return redirect()->back()->with('error', 'Code invalide. Veuillez réessayer.');
     }
     return redirect()->back()->with('success', 'Paiement confirmé avec succès !');
+     // Après validation réussie du code :
+     if ($request->has('stripe_payment')) {
+        return (new StripeController)->checkout($request);
+    }
 }
 }

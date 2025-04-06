@@ -61,7 +61,7 @@
     <div class="payment-card-gif"> <img src="assets/img/git.gif" alt="GIF animé"> </div>
     <div class="payment-card">
         <div class="payment-card-title text-center mb-4">
-            <b>Paiement</b>
+            <b>Strip Paiement</b>
             <div class="payment-cardd-gif"> <img src="assets/img/giff.gif" alt="GIF animé"> </div>
         </div>
         
@@ -76,20 +76,48 @@
         @else
         <img class="img-fluid" src="https://img.icons8.com/color/48/000000/mastercard-logo.png" alt="Mastercard"/>
         @endif
-        
         <input type="text" value="**** **** **** {{ substr($carte->numcart, -4) }}" class="form-control-sm" readonly>
         <form method="POST" action="{{ route('payment.confirm') }}" class="d-inline">
             @csrf
             <input type="hidden" name="carte_id" value="{{ $carte->id }}">
             <button type="submit" class="btn btn-sm btn-success">
-                Valider
+            Payer
             </button>
         </form>
     </div>
 </div>
 @endforeach
         @endif
-        
+        <!-- À côté de tes cartes enregistrées -->
+<div class="payment-row payment-row-vertical mt-4">
+    <div class="d-flex align-items-center gap-2">
+        <img class="img-fluid" src="https://img.icons8.com/color/48/000000/stripe.png" alt="Stripe"/>
+        <span class="form-control-sm">Autre méthode de Paiement sécurisé avec Stripe</span>
+        <button id="stripe-payment-button" class="btn btn-sm btn-success">
+            Payer
+        </button>
+    </div>
+</div>
+<!-- Strip -->
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    const stripeButton = document.getElementById('stripe-payment-button');
+    stripeButton.addEventListener('click', async () => {
+        const amount = localStorage.getItem('panierTotal') || 100;
+        // 2. Appel AJAX pour créer une session Stripe
+        const response = await fetch('/stripe/checkout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({ amount: amount })
+        });
+
+        const { url } = await response.json();
+        window.location.href = url; // Redirige vers Stripe
+    });
+</script>
         <!-- Formulaire pour ajouter une nouvelle carte -->
         <form method="POST" action="{{ route('payment.store') }}">
             @csrf
@@ -123,7 +151,6 @@
             </button>
         </form>
     </div>
-    
     <!-- Fenêtres modales pour la vérification du code (une par carte) -->
     @foreach($cartes as $carte)
     <div class="modal fade" id="codeVerificationModal-{{ $carte->id }}" tabindex="-1" aria-hidden="true">
@@ -149,7 +176,6 @@
     </div>
 </div>
     @endforeach
-    
     <!-- Close Content -->
     <!-- Start Footer -->
     <footer class="bg-dark" id="tempaltemo_footer">

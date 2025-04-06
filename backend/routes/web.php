@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\PanierController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\StripeController;
 use Illuminate\Support\Facades\Mail;
 // Routes pour l'authentification
 Route::get('/log_in', [AuthController::class, 'showLoginForm'])->name('login');
@@ -81,3 +82,7 @@ Route::post('/payment/verify', [PaymentController::class, 'verifyCode'])->name('
 Route::get('/payment/success', function() {
     return view('payment.success');
 })->name('payment.success');
+// Routes existantes (gardées intactes)
+Route::post('/stripe/checkout', [StripeController::class, 'checkout'])->name('stripe.checkout');
+Route::get('/stripe/success', [StripeController::class, 'success'])->name('stripe.success');
+Route::get('/stripe/cancel', [StripeController::class, 'cancel'])->name('stripe.cancel');

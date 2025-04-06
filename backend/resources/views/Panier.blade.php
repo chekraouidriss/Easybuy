@@ -102,8 +102,22 @@
                         </table>
                     </div>
                     <div class="text-end">
-                        <button class="btn btn-success btn-lg" onclick="window.location.href='buy'">Passer à la caisse</button>
+                         <button class="btn btn-success btn-lg" onclick="passerALaCaisse()">Passer à la caisse</button>
                     </div>
+
+<script>
+    function passerALaCaisse() {
+        // Récupère le total depuis l'interface
+        const totalText = document.getElementById('totalPanier').textContent;
+        const total = parseFloat(totalText.replace(' MAD', '').trim());
+        
+        // Stocke le total dans le localStorage
+        localStorage.setItem('panierTotal', total);
+        
+        // Redirige vers la page de paiement
+        window.location.href = 'buy';
+    }
+</script>
                 </div>
             </div>
         </div>
