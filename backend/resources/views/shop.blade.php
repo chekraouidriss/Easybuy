@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.min.css') }}">
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
 
     <style>
         .card {
@@ -82,10 +83,19 @@
                     <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="Panier">
-                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
-                    </a>
+                    <a class="nav-icon position-relative text-decoration-none" href="/panier">
+    <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+    
+    <!-- Affiche le nombre d'articles si l'utilisateur est connecté -->
+    @auth
+        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
+            {{ Auth::user()->panier->produits->sum('pivot.quantite') ?? 0 }}
+        </span>
+    @else
+        <!-- Si l'utilisateur n'est pas connecté, affiche 0 -->
+        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">0</span>
+    @endauth
+</a>
                 </div>
             </div>
         </div>
@@ -188,8 +198,8 @@
                                         <img class="card-img rounded-0 img-fluid" src="{{ asset($produit->SrcImage) }}" alt="{{ $produit->Nom }}">
                                         <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                             <ul class="list-unstyled">
-                                                <li><a class="btn btn-success text-white mt-2" href="shop-single"><i class="far fa-eye"></i></a></li>
-                                                <li><a class="btn btn-success text-white mt-2" href="shop-single"><i class="fas fa-cart-plus"></i></a></li>
+                                                <li><a class="btn btn-success text-white mt-2" href="{{ route('shop.single', ['id' => $produit->id]) }}"><i class="far fa-eye"></i></a></li>
+                                                <li><a class="btn btn-success text-white mt-2" href="{{ route('shop.single', ['id' => $produit->id]) }}"><i class="fas fa-cart-plus"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="assets/css/custom.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
     <style>
         .btn-outline-light {
             color: #ffffff; /* Texte blanc clair */
@@ -238,7 +239,7 @@
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
                         <a href="log_in">
-                            <img src="./assets/img/MAC.jpg" class="card-img-top" alt="...">
+                            <img src="./assets/img/Lap.jpg" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
                             <ul class="list-unstyled d-flex justify-content-between">

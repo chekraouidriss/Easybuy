@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Produit;
 use App\Models\Admin;
+use App\Models\Panier;
+
 use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
@@ -108,7 +110,6 @@ class AuthController extends Controller
     // Rediriger vers la page shop après inscription
     return redirect()->route('shop')->with('success', 'Inscription réussie !');
 }
-
     // Afficher la page shop
     public function shop()
     {
@@ -125,7 +126,7 @@ class AuthController extends Controller
         Auth::logout(); // Déconnecter l'utilisateur
         $request->session()->invalidate(); // Invalider la session
         $request->session()->regenerateToken(); // Régénérer le token CSRF
-        return redirect('/'); // Rediriger vers la page d'accueil
+        return redirect('/index'); // Rediriger vers la page d'accueil
     }
     public function search(Request $request)
 {
@@ -148,8 +149,14 @@ public function adminDashboard()
     $ruptureDeStock = Produit::where('QntStock', '=', 0)->count();
     $produits = Produit::all(); // Récupérer tous les produits
 
+    // 4 derniers produits (triés par ID décroissant)
+    $derniersProduits = Produit::orderBy('id', 'desc')
+                              ->take(4)
+                              ->get(['id', 'Nom', 'QntStock', 'Prix', 'SrcImage']);
+
+
     // Passer les données à la vue admin
-    return view('admin', compact('totalProduits', 'produitsEnStock', 'ruptureDeStock', 'produits'));
+    return view('admin', compact('totalProduits', 'produitsEnStock', 'ruptureDeStock', 'produits','derniersProduits'));
 }
 
 

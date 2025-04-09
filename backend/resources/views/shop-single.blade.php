@@ -4,12 +4,13 @@
     <title>EasyBuy</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/templatemo.css">
-    <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/templatemo.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
-    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.min.css') }}">
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
     <style>
         .btn-outline-light {
             color: #ffffff; /* Texte blanc clair */
@@ -28,7 +29,7 @@
         <div class="container d-flex justify-content-between align-items-center">
 
             <a class="navbar-brand text-success logo h1 align-self-center" href="index">
-                <img src="assets/img/logo.png" width="128" height="90">
+                <img src="{{ asset('assets/img/logo.png') }}" width="128" height="90">
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -36,25 +37,35 @@
             <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index">Accueil</a>
+                    <li class="nav-item">
+                            <a class="nav-link" href="/index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about">À Propos</a>
+                            <a class="nav-link" href="/about">À Propos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="shop">Boutique</a>
+                            <a class="nav-link" href="/shop">Boutique</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contact">Contact</a>
+                            <a class="nav-link" href="/contact">Contact</a>
                         </li>
                     </ul>
                 </div>
                 <div class="navbar align-self-center d-flex">
-                    <a class="nav-icon position-relative text-decoration-none" href="Panier">
-                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
-                    </a> 
+                </a>
+                <a class="nav-icon position-relative text-decoration-none" href="/panier">
+    <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+    
+    <!-- Affiche le nombre d'articles si l'utilisateur est connecté -->
+    @auth
+        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
+            {{ Auth::user()->panier->produits->sum('pivot.quantite') ?? 0 }}
+        </span>
+    @else
+        <!-- Si l'utilisateur n'est pas connecté, affiche 0 -->
+        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">0</span>
+    @endauth
+</a>
                 </div>
             </div>
 
@@ -67,7 +78,7 @@
             <div class="row">
                 <div class="col-lg-5 mt-5">
                     <div class="card mb-3">
-                        <img class="card-img img-fluid" src="assets/img/1.jpg" alt="Card image cap" id="product-detail">
+                    <img class="card-img img-fluid" src="{{ asset($produit->SrcImage) }}" alt="{{ $produit->Nom }}">
                     </div>
                     
                 </div>
@@ -75,8 +86,8 @@
                 <div class="col-lg-7 mt-5">
                     <div class="card">
                         <div class="card-body">
-                            <h1 class="h2">Nom:</h1>
-                            <p class="h3 py-2">2500.00MAD</p>
+                            <h1 class="h2">Nom:<b>{{ $produit->Nom }}</b></h1>
+                            <p class="h3 py-2"><b>{{ $produit->Prix }} MAD</b></p>
                             <p class="py-2">
                                 <i class="fa fa-star text-warning"></i>
                                 <i class="fa fa-star text-warning"></i>
@@ -89,7 +100,7 @@
                                     <h6>Catégorie:</h6>
                                 </li>
                                 <li class="list-inline-item">
-                                    <p class="text-muted"><strong>HP</strong></p>
+                                    <p class="text-muted"><strong><b>{{ $produit->Categorie }}</b></strong></p>
                                 </li>
                                 </ul>
                                 <ul class="list-inline">
@@ -97,13 +108,12 @@
                                     <h6>Qte_Stock:</h6>
                                 </li>
                                 <li class="list-inline-item">
-                                    <p class="text-muted"><strong>3</strong></p>
+                                    <p class="text-muted"><strong><b>{{ $produit->QntStock }}</b></strong></p>
                                 </li>
                             </ul>
 
                             <h6>Description:</h6>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse. Donec condimentum elementum convallis. Nunc sed orci a diam ultrices aliquet interdum quis nulla.</p>
-                            
+                            <p><b>{{ $produit->Description }}</b></p>
                             <form action="" method="GET">
                                 <input type="hidden" name="product-title" value="Activewear">
                                 <div class="row">
@@ -120,12 +130,47 @@
                                     </div>
                                 </div>
                                 <div class="row pb-3">
-                                    <div class="col d-grid">
-                                        <a class="btn btn-success btn-lg" href="shop">Retour</a>
-                                    </div>
-                                    <div class="col d-grid">
-                                        <a href="panier" class="btn btn-success btn-lg">Ajouter au Panier</a>
-                                    </div>
+                                <div class="col d-grid">
+                                    <a class="btn btn-success btn-lg" href="{{ route('shop') }}">Retour</a>
+                                </div>
+                                <div class="col d-grid">
+                                    <button type="button" class="btn btn-success btn-lg" id="btn-ajouter-panier" data-produit-id="{{ $produit->id }}">
+                                       Ajouter au Panier
+                                    </button>
+                                </div>
+<script>
+function ajouterAuPanier(produitId, quantite) {
+    fetch('/panier/ajouter', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({
+            produit_id: produitId,
+            quantite: quantite
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erreur réseau');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.success) {
+            window.location.href = '/panier';
+        } else {
+            alert(data.message || 'Erreur lors de l\'ajout au panier');
+        }
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+        alert('Une erreur est survenue: ' + error.message);
+    });
+}
+</script>
+</div>
                                 </div>
                             </form>
 
@@ -217,14 +262,14 @@
     </footer>
     <!-- End Footer -->
     <!-- Start Script -->
-    <script src="assets/js/jquery-1.11.0.min.js"></script>
-    <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/templatemo.js"></script>
-    <script src="assets/js/custom.js"></script>
+    <script src="{{ asset('assets/js/jquery-1.11.0.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery-migrate-1.2.1.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/js/templatemo.js') }}"></script>
+    <script src="{{ asset('assets/js/custom.js') }}"></script>
+    <script src="{{ asset('assets/js/slick.min.js') }}"></script>
     <!-- End Script -->
     <!-- Start Slider Script -->
-    <script src="assets/js/slick.min.js"></script>
     <script>
         $('#carousel-related-product').slick({
             infinite: true,
@@ -255,9 +300,104 @@
                 }
             ]
         });
+        
     </script>
     <!-- End Slider Script -->
 
 </body>
+<script>
+    // Gestion de la quantité
+    document.addEventListener('DOMContentLoaded', function() {
+        const btnMinus = document.getElementById('btn-minus');
+        const btnPlus = document.getElementById('btn-plus');
+        const varValue = document.getElementById('var-value');
+        const productQuantity = document.getElementById('product-quanity');
 
+        let quantity = 1;
+
+        function updateQuantity() {
+            varValue.textContent = quantity;
+            productQuantity.value = quantity;
+        }
+
+        btnMinus.addEventListener('click', function() {
+            if (quantity > 1) {
+                quantity--;
+                updateQuantity();
+            }
+        });
+
+        btnPlus.addEventListener('click', function() {
+            quantity++;
+            updateQuantity();
+        });
+
+        updateQuantity();
+
+        // Gestion de l'ajout au panier
+        document.getElementById('btn-ajouter-panier').addEventListener('click', function() {
+            const produitId = this.getAttribute('data-produit-id');
+            const quantite = parseInt(document.getElementById('var-value').textContent);
+            
+            fetch('/panier/ajouter', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    produit_id: produitId,
+                    quantite: quantite
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erreur réseau');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    window.location.href = '/panier';
+                } else {
+                    alert(data.message || 'Erreur lors de l\'ajout au panier');
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Une erreur est survenue: ' + error.message);
+            });
+        });
+
+        // Slider
+        $('#carousel-related-product').slick({
+            infinite: true,
+            arrows: false,
+            slidesToShow: 4,
+            slidesToScroll: 3,
+            dots: true,
+            responsive: [{
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 3
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 3
+                }
+            }]
+        });
+    });
+    </script>
 </html>

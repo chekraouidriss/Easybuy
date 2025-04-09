@@ -22,4 +22,8 @@ class Produit extends Model
         'QntStock',
         'SrcImage',
     ];
+    public function paniers() {
+        return $this->belongsToMany(Panier::class, 'panier_produits')
+                    ->withPivot('quantite'); // snake_case
+    }
 }
