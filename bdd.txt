@@ -1,0 +1,128 @@
+CREATE DATABASE easybuy;
+USE easybuy
+-------------------------------------------------------------------
+-- Table Admin (hérite de Utilisateur)
+CREATE TABLE Admin (
+     id INT AUTO_INCREMENT PRIMARY KEY,
+    Nom VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) UNIQUE NOT NULL,
+    Motdepasse VARCHAR(255) NOT NULL
+);
+
+-- Table Produits
+CREATE TABLE Produits (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    Nom VARCHAR(255) NOT NULL,
+    Categorie VARCHAR(255),
+    Prix DECIMAL(10,2) NOT NULL,
+    Description TEXT,
+    QntStock INT NOT NULL,
+    SrcImage VARCHAR(255)
+);
+
+-- Table Panier
+CREATE TABLE Panier (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    users_id BIGINT(20) NOT NULL UNIQUE,
+    FOREIGN KEY (users_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Table relationnelle Panier_Produits (relation entre Panier et Produits)
+CREATE TABLE Panier_Produits (
+    Panier_id INT,
+    Produit_id INT,
+    Quantite INT NOT NULL DEFAULT 1,
+    PRIMARY KEY (Panier_id, Produit_id),
+    FOREIGN KEY (Panier_id) REFERENCES Panier(id) ON DELETE CASCADE,
+    FOREIGN KEY (Produit_id) REFERENCES Produits(id) ON DELETE CASCADE
+);
+
+-- Table Commande
+CREATE TABLE Commande (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    totalprix DECIMAL(10,2) NOT NULL,
+    date_commande DATE NOT NULL,
+    users_id BIGINT(20) NOT NULL,
+    FOREIGN KEY (users_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Table relationnelle Commande_Produits (relation entre Commande et Produits)
+CREATE TABLE Commande_Produits (
+    Commande_id INT,
+    Produit_id INT,
+    Quantite INT NOT NULL DEFAULT 1,
+    PRIMARY KEY (Commande_id, Produit_id),
+    FOREIGN KEY (Commande_id) REFERENCES Commande(id) ON DELETE CASCADE,
+    FOREIGN KEY (Produit_id) REFERENCES Produits(id) ON DELETE CASCADE
+);
+
+-- Table PaymentCarte
+CREATE TABLE PaymentCarte (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    numcart BiGINT NOT NULL UNIQUE,
+    ExpirationDate DATE NOT NULL,
+    CVV INT NOT NULL,
+    users_id BIGINT(20) NOT NULL,
+    FOREIGN KEY (users_id) REFERENCES users(id) ON DELETE CASCADE
+);
+--------------------------------------------------------------------------------
+---------Data-------------------
+-- Insertion de l'admin
+INSERT INTO Admin (Nom, Email, Motdepasse)
+VALUES
+('Admin Unique', 'admin@example.com', 'adminpass1');
+
+-- Insertion de quelques clients
+INSERT INTO Client (Nom, Email, Motdepasse, Adresse, Ville, Code_postale, Tele)
+VALUES
+('John Doe', 'john.doe@example.com', 'password123', '123 Main St', 'Agadir', '80000', '0612345678'),
+('Jane Smith', 'jane.smith@example.com', 'securepass456', '456 Elm St', 'Marrakech', '40000', '0698765432');
+
+-- Insertion de quelques produits
+INSERT INTO Produits (Nom, Categorie, Prix, Description, QntStock, SrcImage)
+VALUES
+('Rog Zephyrus G16 16GB RAM 512GB SSD', 'laptop', 1699.99, 'Le Rog Zephyrus G16 offre une performance de jeu exceptionnelle grâce à un processeur Intel i7 de 12e génération, 16GB de RAM et un SSD de 512GB pour un démarrage rapide des applications et des jeux. Son écran de 16 pouces avec des bords fins offre une expérience visuelle immersive.', 10, 'assets/img/pc_roc.jpg'),
+('HP Laptop 2024 - Intel i7, 32GB RAM, 1TB SSD', 'laptop', 1499.99, 'Le HP Laptop 2024 est un appareil haute performance avec un processeur Intel i7 de dernière génération, 32GB de RAM et un SSD de 1TB. Il est parfait pour les professionnels, les créateurs de contenu et les gamers, avec un écran de 15,6 pouces Full HD et une autonomie de batterie longue durée.', 20, 'assets/img/3.jpg'),
+('MacBook Air M2 8GB RAM 256GB SSD', 'laptop', 1199.99, 'Le MacBook Air M2 d\'Apple combine un design ultra-fin et une puissance impressionnante avec le processeur M2. Il dispose de 8GB de RAM et d\'un SSD de 256GB pour des performances rapides et fluides. Son écran Retina de 13,3 pouces avec True Tone améliore la qualité visuelle.', 15, 'assets/img/1.jpg'),
+('Disque dur WD Blue SA510 500GB SSD', 'disque dur', 49.99, 'Le disque SSD WD Blue SA510 offre une capacité de stockage de 500GB avec des vitesses de lecture et d\'écriture rapides, améliorant ainsi les performances de votre PC ou laptop. Il est parfait pour les utilisateurs à la recherche d\'une option abordable mais fiable.', 30, 'assets/img/4.jpg'),
+('Disque dur externe SP Selec 1TB', 'disque dur', 89.99, 'Le disque dur externe SP Selec offre une capacité de stockage de 1TB avec une interface USB 3.0 pour des transferts rapides de données. Il est idéal pour sauvegarder vos fichiers, photos et vidéos. Son design compact le rend facile à transporter.', 25, 'assets/img/5.jpg'),
+('Carte réseau TP-Link Archer T4U V3', 'carte reseaux', 29.99, 'La carte réseau TP-Link Archer T4U V3 prend en charge la norme Wi-Fi 802.11ac pour des connexions sans fil à haute vitesse. Elle offre des débits de 1300 Mbps sur 5GHz et 450 Mbps sur 2.4GHz, idéale pour les jeux en ligne et le streaming vidéo.', 40, 'assets/img/7.jpg'),
+('Samsung Galaxy 2024 128GB', 'smartphone', 999.99, 'Le Samsung Galaxy 2024 est équipé d\'un écran AMOLED de 6,5 pouces avec une résolution de 2400 x 1080. Il dispose de 128GB de stockage interne et d\'une batterie de 5000mAh pour une longue autonomie. Les caméras avant et arrière offrent des photos de qualité professionnelle.', 20, 'assets/img/sam.jpg'),
+('iPhone 11 64GB - Dual Camera', 'smartphone', 749.99, 'L\'iPhone 11 est équipé d\'un processeur A13 Bionic, de 64GB de stockage et de caméras ultra-large et grand-angle à 12MP pour des photos et vidéos exceptionnelles. Son écran Liquid Retina HD de 6,1 pouces offre une qualité visuelle impressionnante.', 50, 'assets/img/phone.jpg'),
+('Double écran 14.5 pouces', 'double ecran', 299.99, 'Ce double écran de 14.5 pouces permet une productivité accrue avec une résolution Full HD. Il est conçu pour les professionnels et les créateurs de contenu qui ont besoin d\'un espace d\'affichage supplémentaire. Il est compatible avec tous les appareils disposant de sorties HDMI ou USB-C.', 10, 'assets/img/Ecran_d.jpg'),
+('Disque dur externe Seagate 2TB', 'disque dur', 119.99, 'Le disque dur externe Seagate de 2TB est idéal pour les sauvegardes de grande taille, le stockage de fichiers multimédia ou la sauvegarde de jeux. Il dispose d\'une interface USB 3.0 pour des transferts rapides et d\'un design compact et portable pour une utilisation facile.', 15, 'assets/img/HARDDISK.jpg');
+-- Insertion de paniers
+INSERT INTO Panier (Client_id)
+VALUES
+(1),
+(2);
+
+-- Insertion de produits dans les paniers
+INSERT INTO Panier_Produits (Panier_id, Produit_id, Quantite)
+VALUES
+(7, 3, 2),
+
+-- Insertion de commandes
+INSERT INTO Commande (totalprix, date_commande, Client_id)
+VALUES
+(2499.98, '2025-03-16', 1),
+(1549.98, '2025-03-16', 2);
+
+-- Insertion de produits dans les commandes
+INSERT INTO Commande_Produits (Commande_id, Produit_id, Quantite)
+VALUES
+(1, 1, 1),
+(1, 2, 1),
+(2, 3, 1),
+(2, 4, 2);
+
+-- Insertion de cartes de paiement
+INSERT INTO PaymentCarte (numcart, ExpirationDate, CVV, Client_id)
+VALUES
+(1234567890123456, '2026-12-31', 123, 1),
+(9876543210987654, '2027-06-30', 456, 2);
+------------------------------------------
+@csrf	
+sessions
+Hachage des mots de passe
+Auth::attempt	
