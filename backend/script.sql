@@ -1,3 +1,11 @@
+-- ============================================================
+-- NOTE: This file contains DUMMY/TEST data only for local
+-- development seeding. Plaintext passwords below are fake
+-- placeholders (e.g. "password123") and are never used as
+-- real credentials. In the actual application, Laravel's
+-- Auth system hashes all passwords with bcrypt before storage.
+-- Never seed a real/production database with plaintext passwords.
+-- ============================================================
 CREATE DATABASE IF NOT EXISTS easybuy;
 USE easybuy;
 
